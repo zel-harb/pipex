@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split.c                                            :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 18:00:07 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/01 17:56:44 by zel-harb         ###   ########.fr       */
+/*   Created: 2023/11/23 10:47:08 by zel-harb          #+#    #+#             */
+/*   Updated: 2023/11/27 21:26:21 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
- char	**ft_free(char **s, int j)
+static char	**ft_free(char **s, int j)
 {
 	int	i;
 
@@ -26,7 +26,7 @@
 	return (NULL);
 }
 
-int	count_words(char const *s, char c)
+static int	count_words(char const *s, char c)
 {
 	int	i;
 	int	cmp;
