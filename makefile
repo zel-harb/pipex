@@ -1,6 +1,6 @@
 CC = cc
 NAME = pipex
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+FLAGS = -Wall -Wextra -Werror 
 SOURCES = main.c \
 		  check.c \
 		  utils.c \

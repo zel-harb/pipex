@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/01 17:58:46 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/02 13:27:27 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int main(int ac, char **av,char **env)
          ft_putstr_fd("Error\n",2);
         exit(1);
     }
-    if(!open(av[1],O_RDONLY))
+    if(access(av[1], F_OK) == -1 || access(av[1], R_OK) == -1)
     {
-         ft_putstr_fd("Error1\n",2);
+         perror(av[1]);
         exit(1);
     }
    full_pip(&pip,av);
@@ -53,7 +53,7 @@ int main(int ac, char **av,char **env)
         i =0 ;
     // while(pip.path[i])
     // {
-    //     printf("---%s\n",pip.path[i]);
+        printf("---%s\n",pip.path);
     //     i++;
     // }
     ft_free(pip.cmd1,pip.n_cmd1);

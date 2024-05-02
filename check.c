@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:16:25 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/01 18:01:03 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/02 13:19:52 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void found_cmd(char *env,t_pip *pip)
         }
         else
         {
-           //pip->path[k] = str[i];
-            k++;
+           pip->path = str[i];
+            return;
         }
         free(res);
         i++;

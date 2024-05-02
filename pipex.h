@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:28 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/01 17:57:22 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/02 13:19:37 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 typedef struct s_pip
 {
     char **cmd1;
-    char **path;
+    char *path;
     int   n_cmd1;
     int    n_cmd2;
     int    n_path_1;
