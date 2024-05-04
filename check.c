@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:16:25 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/02 13:19:52 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/04 21:14:11 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void check_first_arg(char *arg)
     }
 }
 
-void found_cmd(char *env,t_pip *pip)
+void found_cmd(char *env,t_pip *pip,char *var)
 {
      char **str;
      char *res;
@@ -36,14 +36,15 @@ void found_cmd(char *env,t_pip *pip)
      j = 0;
      k = 0;
      str =ft_split(env,':');
+     
      while(str[i])
      {
+      
         res = ft_strjoin(str[i],"/");
       
-        if(access(ft_strjoin(res,pip->cmd1[0]),R_OK) !=0)
+        if(access(ft_strjoin(res,var),X_OK) !=0)
         {
             j++;
-              
             if(j  == count_words(env,':'))
             {
                 ft_putstr_fd("Error\n",2);
@@ -61,19 +62,3 @@ void found_cmd(char *env,t_pip *pip)
      }
 }
 
-char  *get_path(char **env)
-{
-    char *str;
-    int i;
-
-    i = 0;
-    while(env[i])
-    {
-        if(ft_strnstr(env[i],"PATH",4) !=0)
-        {
-            str = ft_strnstr(env[i],"PATH",4);
-            return str;
-        }
-        i++;
-    }
-}

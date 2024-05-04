@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 19:04:26 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/01 17:54:08 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/04 21:14:46 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,28 @@ void full_pip(t_pip *pip,char **av)
     pip->cmd1 = ft_split(av[2],' ');
     pip->n_cmd1 = count_words(av[2],' ');
     pip->n_cmd2 = count_words(av[3],' ');
-    // pip->cmd2 = ft_split(av[3],' ');
+    pip->cmd2 = ft_split(av[3],' ');
     
 }
-void check_option(t_pip pip)
+char  *get_path(char **env)
 {
-   execve(ft_strjoin(pip.path[0],pip.cmd1[0]),pip.cmd1,NULL);
-   printf("This line will not be executed.\n"); 
+    char *str;
+    int i;
+
+    i = 0;
+    while(env[i])
+    {
+        if(ft_strnstr(env[i],"PATH",4) !=0)
+        {
+            str = ft_strnstr(env[i],"PATH",4);
+            return str;
+        }
+        i++;
+    }
+    return NULL;
 }
+// void check_option(t_pip pip)
+// {
+//    execve(ft_strjoin(pip.path[0],pip.cmd1[0]),pip.cmd1,NULL);
+//    printf("This line will not be executed.\n"); 
+// }
