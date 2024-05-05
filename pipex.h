@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:28 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/04 21:13:23 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/05 15:01:31 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_pip
 } t_pip;
 void	ft_putstr_fd(char *s, int fd);
 void    check_first_arg(char *arg);
-void    found_cmd(char *env,t_pip *pip,char *var);
+void    found_cmd(char **str,t_pip *pip,char *var);
 int	    ft_strlen(char const *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 int     count_words(char const *s, char c);
@@ -39,4 +39,5 @@ void     full_pip(t_pip *pip,char **av);
 void check_option(t_pip pip);
 char	**ft_free(char **s, int j);
 char	**ft_split(char const *s, char c);
+int find(char *av);
 #endif
