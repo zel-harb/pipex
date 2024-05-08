@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 19:04:26 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/05 15:03:05 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/07 11:37:51 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 void full_pip(t_pip *pip,char **av)
 {
     pip->cmd1 = ft_split(av[2],' ');
-    pip->n_cmd1 = count_words(av[2],' ');
-    pip->n_cmd2 = count_words(av[3],' ');
     pip->cmd2 = ft_split(av[3],' ');
     
 }
@@ -42,7 +40,7 @@ int find(char *av)
     int i;
 
     i = 0;
-    if(access(av,F_OK) == 0)
+    if(access(av,X_OK) == 0)
     {
         return 0;
     }
