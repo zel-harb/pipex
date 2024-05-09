@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 19:04:26 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/07 11:37:51 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/09 11:38:21 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ char  *get_path(char **env)
 int find(char *av)
 {
     int i;
+    char **v;
 
     i = 0;
-    if(access(av,X_OK) == 0)
+    v =ft_split(av,' ');
+    if (access(v[0],X_OK) == 0)
     {
         return 0;
     }
