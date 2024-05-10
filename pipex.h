@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:28 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/08 10:20:43 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/10 01:48:48 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+#include <sys/wait.h>
 
 typedef struct s_pip
 {
