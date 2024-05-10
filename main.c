@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/10 02:51:02 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:50:17 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void child_cmd1(char **av,t_pip *pip,char **env)
         {
             execve(pip->cmd1[0],pip->cmd1,env);
             perror(pip->cmd1[0]);
+         
             exit(1);
         }
         else if (ft_strncmp(av[2], "/", 1) == 0 ||ft_strncmp(av[2], "./", 2)== 0 )
@@ -70,11 +71,14 @@ void child_cmd1(char **av,t_pip *pip,char **env)
                 perror(av[2]);
                 exit(1);
             }
+            else
+            {
             found_cmd(pip->path_env,pip,pip->cmd1[0]);
             res = ft_strjoin(pip->path,"/");
             execve(ft_strjoin(res,pip->cmd1[0]),pip->cmd1,env);
             perror(pip->cmd1[0]);
             exit(1);
+            }
     }
     
 }
@@ -111,6 +115,11 @@ void child_cmd2(char **av,t_pip *pip,char **env)
      if(pip->pid1 == 0)
      {
         fd1 = open(av[4],O_WRONLY | O_CREAT | O_TRUNC, 0666);
+        if(fd1 == -1)
+        {
+            perror(av[4]);
+            exit(1);
+        }
         dup2(pip->pfd[0],0);
         dup2(fd1,1);
         close(fd1);
@@ -149,6 +158,7 @@ int main(int ac, char **av,char **env)
     pip.pid =fork();
     if(pip.path_env == NULL)
     {
+       
         if(pip.pid == 0)
         {
            child_cmd3(av,&pip,env);
@@ -169,7 +179,6 @@ int main(int ac, char **av,char **env)
         perror("pipe");
         exit(1);
     }
-    pip.pid =fork();
     if(pip.pid < 0)
     {
         perror("fork fail");
@@ -185,7 +194,7 @@ int main(int ac, char **av,char **env)
     close(pip.pfd[1]);
     waitpid(pip.pid, NULL, 0);
     waitpid(pip.pid1, NULL, 0);
-    }
+    //}
     return 0;
   }
     
