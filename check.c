@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:16:25 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/10 15:01:43 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/08 11:33:11 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,8 @@ void found_cmd(char **str,t_pip *pip,char *var)
             j++;
             if(j  == count(str))
             {
-                free(res);
-                perror(var);
-                //ft_putstr_fd("command not found\n",2);
+                   free(res);
+                ft_putstr_fd("command not found\n",2);
              
                 exit(1);
             }
