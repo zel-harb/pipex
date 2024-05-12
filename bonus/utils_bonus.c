@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:46:34 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/07 14:19:54 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/11 21:13:51 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,40 +79,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		str[i++] = s2[j++];
 	str[i] = '\0';
 	return (str);
-}
-
-char	*ft_strnstr(const char *s, const char *to_find, size_t len)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	if (!s && len == 0)
-		return (NULL);
-	if (!(*to_find))
-		return ((char *)s);
-	while (s[i] && i < len)
-	{
-		j = 0;
-		while (s[i + j] == to_find[j] && to_find[j] && s[i + j] && i + j < len)
-			j++;
-		if (j == (size_t)ft_strlen(to_find))
-			return ((char *)s + i);
-		i++;
-	}
-	return (0);
-}
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	if (n == 0)
-		return (0);
-	while ((s1[i] == s2[i]) && s1[i] && s2[i] && i < n - 1)
-	{
-		i++;
-	}
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

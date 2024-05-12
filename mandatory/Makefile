@@ -5,7 +5,9 @@ SOURCES = main.c \
 		  check.c \
 		  utils.c \
 		  split.c \
-		  funct.c 
+		  funct.c \
+		  funct2.c \
+		  utils2.c \
 
 OBJECTS = $(SOURCES:.c=.o)
 

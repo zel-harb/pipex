@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
- char	**ft_free(char **s, int j)
+char	**ft_free(char **s, int j)
 {
 	int	i;
 
@@ -98,8 +98,8 @@ static char	**set_word(const char *str, char c, int l)
 
 char	**ft_split(char const *s, char c)
 {
-	char	**word;
-	int		len;
+	char **word;
+	int len;
 
 	if (s == NULL)
 		return (NULL);
