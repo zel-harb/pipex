@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/12 10:29:46 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/13 22:29:21 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	child_cmd1(char **av, t_pip *pip, char **env)
 		ft_putstr_fd("bash: ", 2);
 		perror(av[1]);
 	}
-	else if(av[2][0] =='\0' || vide(av[2]) == 1  )
+	else if(av[2][0] == '\0' || vide(av[2]) == 1)
 	{
 		ft_putstr_fd("bash : command not found \n",2);
 		exit(1);
@@ -138,13 +138,23 @@ int	main(int ac, char **av, char **env)
 	}
 	pipe(pip.pfd);
 	pip.path_env = ft_split(get_path(env), ':');
-	if(ft_strlen(get_path(env)) == 0 )
+	
+	//dprintf(2, "path : %s\n", pip.path_env[0]);
+	// if(ft_strlen(get_path(env)) == 0 )
+	// {
+	// 	pip.pid = fork();
+	// 	null_env(av, &pip, env);
+	// }
+	if (!pip.path_env)
 	{
-			pip.pid = fork();
+		dprintf(2,"hi\n");
+		pip.pid = fork();
 		null_env(av, &pip, env);
 	}
-	else if (pip.path_env == NULL )
+	
+	else if (!pip.path_env[0])
 	{
+		dprintf(2,"hi\n");
 		pip.pid = fork();
 		null_env(av, &pip, env);
 	}

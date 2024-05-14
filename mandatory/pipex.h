@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:28 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/12 09:33:31 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/13 22:28:37 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int			find(char *av);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 void		dup_close1(int fd, t_pip *pip, char **av);
 void		dup_close2(int fd1, t_pip *pip, char **av);
-;
 void		perr(char *str);
 void		close_wait(t_pip *pip);
 void		child_cmd4(char **av, t_pip *pip, char **env);

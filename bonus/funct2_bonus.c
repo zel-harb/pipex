@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   funct2.c                                           :+:      :+:    :+:   */
+/*   funct2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 21:11:18 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/11 21:16:51 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:02:22 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	null_env(char **av, t_pip *pip, char **env)
-{
-	if (pip->pid == 0)
-	{
-		child_cmd3(av, pip, env);
-	}
-	else
-	{
-		child_cmd4(av, pip, env);
-		close_wait(pip);
-	}
-}
+// void	null_env(char **av, t_pip *pip, char **env)
+// {
+// 	if (pip->pid == 0)
+// 	{
+// 		child_cmd3(av, pip, env);
+// 	}
+// 	else
+// 	{
+// 		child_cmd4(av, pip, env);
+// 		close_wait(pip);
+// 	}
+// }
 
 void	check_pip(t_pip *pip)
 {
