@@ -8,6 +8,8 @@ SOURCES = main_bonus.c \
 		  funct_bonus.c \
 		  funct2_bonus.c \
 		  utils2_bonus.c \
+		  cmd.c			\
+		  cmd_null.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

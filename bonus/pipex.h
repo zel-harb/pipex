@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:28 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/16 11:49:48 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/16 20:07:32 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ typedef struct s_pip
 {
 	char 	**av;
 	char	*path;
+	char **env;
 	int  	nbr_pip;
 	char	**path_env;
+	int 	index_av;
+	int 	index_pip;
 	
 
 }			t_pip;
@@ -51,4 +54,10 @@ void		perr(char *str);
 int vide(char *av);
 void count_pipe(t_pip *pip,int ac);
 void cmd_cd(int *pfd1,char **av,t_pip *pip,char **env,int *j,int d);
+void	ft_close(int *pfd, int nbr);
+void all_cmd(t_pip *pip,int *pid,int *pfd,int ac);
+void first_cmd(t_pip *pip,int *pid);
+void last_cmd(t_pip *pip,int *pfd,int ac);
+void mid_cmd(t_pip *pip,int *pid);
+void env_null(t_pip *pip,int *pid,int *pfd,int ac);
 #endif
