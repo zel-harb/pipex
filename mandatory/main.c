@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/13 22:29:21 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/15 21:55:38 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,14 +147,12 @@ int	main(int ac, char **av, char **env)
 	// }
 	if (!pip.path_env)
 	{
-		dprintf(2,"hi\n");
 		pip.pid = fork();
 		null_env(av, &pip, env);
 	}
 	
 	else if (!pip.path_env[0])
 	{
-		dprintf(2,"hi\n");
 		pip.pid = fork();
 		null_env(av, &pip, env);
 	}

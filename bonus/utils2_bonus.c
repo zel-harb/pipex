@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 21:13:26 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/13 22:36:38 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/15 20:51:01 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,3 +91,4 @@ void cmd_cd(int *pfd1,char **av,t_pip *pip,char **env,int *j,int d)
 		perr("execve");
 	
 }
+

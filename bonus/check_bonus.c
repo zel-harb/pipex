@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:16:25 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/14 15:08:35 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/15 20:55:29 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	found_cmd(char **str, t_pip *pip, char *var)
 			{
 				free(res);
 				ft_putstr_fd("bash : command not found\n", 2);
-				dprintf(2,"-->%s\n",var);
 				exit(1);
 			}
 		}
