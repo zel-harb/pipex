@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/16 20:51:49 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/19 16:44:43 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	child_cmd3(char **av, t_pip *pip, char **env)
 	{
 		ft_putstr_fd("bash: ", 2);
 		perror(av[1]);
+		exit(1);
 	}
 	else
 	{
@@ -48,6 +49,12 @@ void	child_cmd4(char **av, t_pip *pip, char **env)
 	if (pip->pid1 == 0)
 	{
 		fd1 = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		if (access(av[4], F_OK) == -1 || access(av[4], R_OK) == -1)
+		{
+			ft_putstr_fd("bash: ", 2);
+			perror(av[4]);
+			exit(1);
+		}
 		dup2(pip->pfd[0], 0);
 		dup2(fd1, 1);
 		close(fd1);
@@ -57,7 +64,7 @@ void	child_cmd4(char **av, t_pip *pip, char **env)
 		execve(pip->cmd2[0], pip->cmd2, env);
 		ft_putstr_fd("bash: ", 2);
 		perror(pip->cmd2[0]);
-		exit(1);
+		exit(127);
 	}
 }
 
@@ -92,6 +99,7 @@ void	child_cmd1(char **av, t_pip *pip, char **env)
 		res = ft_strjoin(pip->path, "/");
 		execve(ft_strjoin(res, pip->cmd1[0]), pip->cmd1, env);
 		perr("execve");
+		exit(1);
 	}
 }
 
@@ -104,26 +112,34 @@ void	child_cmd2(char **av, t_pip *pip, char **env)
 	if (pip->pid1 == 0)
 	{
 		fd1 = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		if (access(av[4], F_OK) == -1 || access(av[4], R_OK) == -1)
+		{
+			ft_putstr_fd("bash: ", 2);
+			perror(av[4]);
+			exit(1);
+		}
 		dup_close2(fd1, pip, av);
 		if (find(av[3]) == 0)
 		{
 			execve(pip->cmd2[0], pip->cmd2, env);
 			perror("execve");
+			exit(127);
 		}
 		else if(av[3][0] =='\0' || vide(av[3]) == 1 )
 		{
 			ft_putstr_fd("bash : command not found \n",2);
-			exit(1);
+			exit(127);
 		}
 		if (ft_strncmp(av[3], "/", 1) == 0 || ft_strncmp(av[3], "./", 2) == 0)
 		{
 			perror(av[3]);
-			exit(1);
+			exit(127);
 		}
 		found_cmd(pip->path_env, pip, pip->cmd2[0]);
 		res1 = ft_strjoin(pip->path, "/");
 		execve(ft_strjoin(res1, pip->cmd2[0]), pip->cmd2, env);
 		perror("execve");
+		exit(127);
 	}
 }
 
@@ -131,6 +147,7 @@ int	main(int ac, char **av, char **env)
 {
 	t_pip	pip;
 
+	pip.value = 0 ;
 	if (ac != 5)
 	{
 		ft_putstr_fd("More agrs\n", 2);
@@ -158,5 +175,5 @@ int	main(int ac, char **av, char **env)
 			child_cmd2(av, &pip, env);
 		close_wait(&pip);
 	}
-	return (0);
+	return (pip.value >> 8);
 }

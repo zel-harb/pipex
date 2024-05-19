@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 21:11:18 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/11 21:16:51 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/19 14:36:05 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	close_wait(t_pip *pip)
 {
 	close(pip->pfd[0]);
 	close(pip->pfd[1]);
-	waitpid(pip->pid, NULL, 0);
-	waitpid(pip->pid1, NULL, 0);
+	waitpid(pip->pid, &(pip->value), 0);
+	waitpid(pip->pid1, &pip->value, 0);
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)

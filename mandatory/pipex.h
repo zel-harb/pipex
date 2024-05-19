@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:28 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/13 22:28:37 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/19 14:23:17 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_pip
 	char	**path_env;
 	pid_t	pid;
 	pid_t	pid1;
+	int		value;
 
 }			t_pip;
 void		ft_putstr_fd(char *s, int fd);
