@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 21:13:26 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/19 20:57:56 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/19 21:37:30 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,30 +63,4 @@ void	count_pipe(t_pip *pip, int ac)
 		pip->nbr_pip = (nbr / 2) + 1;
 }
 
-// void	cmd_cd(int *pfd1, char **av, t_pip *pip, char **env, int *j, int d)
-// {
-// 	int		k;
-// 	char	**cmd;
-// 	int		*pfd;
-// 	char	*res;
 
-// 	pfd = pfd1;
-// 	k = (*j);
-// 	dup2(pfd[k - 2], 0);
-// 	dup2(pfd[k + 1], 1);
-// 	close(pfd[k - 2]);
-// 	close(pfd[k + 1]);
-// 	(*j) = (*j) + 2;
-// 	cmd = ft_split(av[d], ' ');
-// 	if (find(av[d]) == 0)
-// 	{
-// 		execve(cmd[0], cmd, env);
-// 		perr("execve");
-// 	}
-// 	else if (ft_strncmp(av[d], "/", 1) == 0 || ft_strncmp(av[d], "./", 2) == 0)
-// 		perr(av[d]);
-// 	found_cmd(pip->path_env, pip, cmd[0]);
-// 	res = ft_strjoin(pip->path, "/");
-// 	execve(ft_strjoin(res, cmd[0]), cmd, env);
-// 	perr("execve");
-// }

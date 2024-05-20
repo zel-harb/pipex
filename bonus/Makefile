@@ -9,7 +9,12 @@ SOURCES = main_bonus.c \
 		  funct2_bonus.c \
 		  utils2_bonus.c \
 		  cmd.c			\
-		  cmd_null.c
+		  cmd_null.c	\
+		  get_next_line.c \
+		  get_next_line_use.c \
+		  here_doc.c	\
+		  pipe.c \
+		  here_doc_null.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
