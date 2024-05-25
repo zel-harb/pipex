@@ -8,6 +8,8 @@ SOURCES = main.c \
 		  funct.c \
 		  funct2.c \
 		  utils2.c \
+		  cmd.c \
+		  help.c 
 
 OBJECTS = $(SOURCES:.c=.o)
 

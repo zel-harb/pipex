@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:16:25 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/19 20:58:59 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/20 21:34:42 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,13 @@ void	found_cmd(char **str, t_pip *pip, char *var)
 	char	*res;
 	int		i;
 	int		j;
-	int		k;
 
 	i = 0;
 	j = 0;
-	k = 0;
 	while (str[i])
 	{
-		res = ft_strjoin(str[i], "/");
-		if (access(ft_strjoin(res, var), X_OK) != 0)
+		res = ft_strjoin(ft_strjoin(str[i], "/"),var);
+		if (access(res, X_OK) != 0)
 		{
 			j++;
 			if (j == count(str))
@@ -59,6 +57,7 @@ void	found_cmd(char **str, t_pip *pip, char *var)
 		else
 		{
 			pip->path = str[i];
+			free(res);
 			return ;
 		}
 		free(res);

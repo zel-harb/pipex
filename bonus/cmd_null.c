@@ -21,7 +21,7 @@ void	first_cmd_null(t_pip *pip, int *pfd)
 	if (access(pip->av[1], F_OK) == -1 || access(pip->av[1], R_OK) == -1)
 	{
 		ft_putstr_fd("bash: ", 2);
-		perr(pip->av[1],1);
+		perr(pip->av[1], 1);
 	}
 	else
 	{
@@ -32,7 +32,7 @@ void	first_cmd_null(t_pip *pip, int *pfd)
 		cmd = ft_split(pip->av[2], ' ');
 		execve(cmd[0], cmd, pip->env);
 		ft_putstr_fd("bash: ", 2);
-		perr(cmd[0],1);
+		perr(cmd[0], 1);
 	}
 }
 
@@ -42,7 +42,8 @@ void	last_cmd_null(t_pip *pip, int *pfd, int ac)
 	char	**cmd;
 
 	fd2 = open(pip->av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	if (access(pip->av[ac - 1], F_OK) == -1 || access(pip->av[ac - 1], R_OK) == -1)
+	if (access(pip->av[ac - 1], F_OK) == -1 || access(pip->av[ac - 1], R_OK) ==
+		-1)
 	{
 		ft_putstr_fd("bash: ", 2);
 		perror(pip->av[ac - 1]);

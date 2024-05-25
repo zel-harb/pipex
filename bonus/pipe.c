@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:28:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/20 16:31:02 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/23 06:52:10 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ void	pip_pipe(t_pip pip, int *pfd)
 
 void	full_pipe(t_pip *pip, char **av, int ac, char **env)
 {
+	if (ac > 5 || ac < 5)
+	{
+		ft_putstr_fd("More/less arguments\n", 2);
+		exit(1);
+	}
 	pip->av = av;
 	pip->env = env;
 	pip->path_env = ft_split(get_path(env), ':');
@@ -57,7 +62,6 @@ void	wait_pid(int *pid, int ac, t_pip *pip)
 		waitpid(pid[i], &pip->value, 0);
 		i++;
 	}
-	
 }
 int	ft_cmp(char *s1, char *name_moves)
 {
@@ -72,20 +76,21 @@ int	ft_cmp(char *s1, char *name_moves)
 	}
 	return (0);
 }
-void write_pipe(t_pip *pip)
+void	write_pipe(t_pip *pip)
 {
-	char *len;
+	char	*len;
+
 	len = get_next_line(0);
-		while(len &&  ft_cmp(pip->av[2],len) != 0)
-		{
-			write(pip->pfd1[1],len,ft_strlen(len));
-			len = get_next_line(0);
-		}
+	while (len && ft_cmp(pip->av[2], len) != 0)
+	{
+		write(pip->pfd1[1], len, ft_strlen(len));
+		len = get_next_line(0);
+	}
 }
-void here_close_wait(t_pip *pip)
+void	here_close_wait(t_pip *pip)
 {
 	close(pip->pfd1[0]);
-    close(pip->pfd1[1]);
+	close(pip->pfd1[1]);
 	waitpid(pip->pfd1[0], &pip->value, 0);
 	waitpid(pip->pfd1[1], &pip->value, 0);
 }

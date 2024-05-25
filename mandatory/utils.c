@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:46:34 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/11 21:13:51 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/23 05:18:21 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_putchar_fd(char c, int fd)
 		return ;
 	write(fd, &c, 1);
 }
+
 void	ft_putstr_fd(char *s, int fd)
 {
 	int	i;
@@ -31,6 +32,7 @@ void	ft_putstr_fd(char *s, int fd)
 		i++;
 	}
 }
+
 int	ft_strlen(char const *s)
 {
 	int	i;
@@ -40,6 +42,7 @@ int	ft_strlen(char const *s)
 		i++;
 	return (i);
 }
+
 char	*ft_strdup(const char *s1)
 {
 	int		len;
@@ -59,6 +62,7 @@ char	*ft_strdup(const char *s1)
 	p[i] = '\0';
 	return (p);
 }
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	i;

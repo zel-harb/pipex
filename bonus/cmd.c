@@ -6,37 +6,37 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:41:42 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/20 16:52:29 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/20 23:05:23 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void help(t_pip *pip,char **cmd,int value)
+void	help(t_pip *pip, char **cmd, int value)
 {
-	char *res;
-	
+	char	*res;
+
 	found_cmd(pip->path_env, pip, cmd[0]);
-	res = ft_strjoin(pip->path, "/");
-	execve(ft_strjoin(res, cmd[0]), cmd, pip->env);
+	res = ft_strjoin(ft_strjoin(pip->path, "/"),cmd[0]);
+	execve(res, cmd, pip->env);
 	perror(cmd[0]);
 	exit(value);
 }
-void status(t_pip *pip, char **cmd,int i,int value)
+void	status(t_pip *pip, char **cmd, int i, int value)
 {
 	if (find(pip->av[i]) == 0)
 	{
 		execve(cmd[0], cmd, pip->env);
-		perr("execve",value);
+		perr("execve", value);
 	}
 	else if (pip->av[i][0] == '\0' || vide(pip->av[i]) == 1)
 	{
 		ft_putstr_fd("bash : command not found \n", 2);
 		exit(value);
 	}
-	else if (ft_strncmp(pip->av[i], "/", 1) == 0 || ft_strncmp(pip->av[i],
-			"./", 2) == 0)
-		perr(pip->av[i],value);
+	else if (ft_strncmp(pip->av[i], "/", 1) == 0 || ft_strncmp(pip->av[i], "./",
+			2) == 0)
+		perr(pip->av[i], value);
 }
 void	first_cmd(t_pip *pip, int *pfd)
 {
@@ -46,7 +46,7 @@ void	first_cmd(t_pip *pip, int *pfd)
 	if (access(pip->av[1], F_OK) == -1 || access(pip->av[1], R_OK) == -1)
 	{
 		ft_putstr_fd("bash: ", 2);
-		perr(pip->av[1],1);
+		perr(pip->av[1], 1);
 	}
 	else
 	{
@@ -55,8 +55,8 @@ void	first_cmd(t_pip *pip, int *pfd)
 		close(pip->fd1);
 		ft_close(pfd, pip->nbr_pip);
 		cmd = ft_split(pip->av[2], ' ');
-		status(pip,cmd,2,1);
-		help(pip,cmd,1);
+		status(pip, cmd, 2, 1);
+		help(pip, cmd, 1);
 	}
 }
 
@@ -78,10 +78,9 @@ void	last_cmd(t_pip *pip, int *pfd, int ac)
 	close(pip->fd2);
 	ft_close(pfd, pip->nbr_pip);
 	cmd = ft_split(pip->av[pip->index_av], ' ');
-	status(pip,cmd,pip->index_av,127);
-	help(pip,cmd,127);
+	status(pip, cmd, pip->index_av, 127);
+	help(pip, cmd, 127);
 }
-
 
 void	mid_cmd(t_pip *pip, int *pfd)
 {
@@ -92,8 +91,8 @@ void	mid_cmd(t_pip *pip, int *pfd)
 	dup2(pfd[pip->index_pip + 1], 1);
 	ft_close(pfd, pip->nbr_pip);
 	cmd = ft_split(pip->av[pip->index_av], ' ');
-	status(pip,cmd,pip->index_av,1);
-	help(pip,cmd,1);
+	status(pip, cmd, pip->index_av, 1);
+	help(pip, cmd, 1);
 }
 
 void	all_cmd(t_pip *pip, int *pid, int *pfd, int ac)

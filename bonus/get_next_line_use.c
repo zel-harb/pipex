@@ -28,9 +28,9 @@ char	*ft_strchr(char *s, int c)
 
 char	*ft_strjoin_line(char *s1, char *s2)
 {
-	size_t	i;
-	size_t	j;
-	char	*str;
+	size_t i;
+	size_t j;
+	char *str;
 
 	i = 0;
 	j = 0;

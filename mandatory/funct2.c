@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 21:11:18 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/19 14:36:05 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/23 07:04:45 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ void	null_env(char **av, t_pip *pip, char **env)
 		child_cmd3(av, pip, env);
 	}
 	else
-	{
 		child_cmd4(av, pip, env);
-		close_wait(pip);
-	}
+	close_wait(pip);
 }
 
 void	check_pip(t_pip *pip)
@@ -42,8 +40,8 @@ void	check_pip(t_pip *pip)
 
 void	perr(char *str)
 {
+	ft_putstr_fd("bash : ", 2);
 	perror(str);
-	exit(1);
 }
 
 void	close_wait(t_pip *pip)
@@ -56,7 +54,7 @@ void	close_wait(t_pip *pip)
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (n == 0)

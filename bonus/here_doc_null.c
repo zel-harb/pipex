@@ -16,15 +16,15 @@ void	first_cmdh_null(t_pip *pip, int *pfd)
 {
 	char	**cmd;
 
-		dup2(pip->pfd1[0], 0);
-		dup2(pfd[1], 1);
-        close(pip->pfd1[0]);
-        close(pip->pfd1[1]);
-		ft_close(pfd, pip->nbr_pip);
-		cmd = ft_split(pip->av[2], ' ');
-		execve(cmd[0], cmd, pip->env);
-		ft_putstr_fd("bash: ", 2);
-		perr(cmd[0],1);
+	dup2(pip->pfd1[0], 0);
+	dup2(pfd[1], 1);
+	close(pip->pfd1[0]);
+	close(pip->pfd1[1]);
+	ft_close(pfd, pip->nbr_pip);
+	cmd = ft_split(pip->av[2], ' ');
+	execve(cmd[0], cmd, pip->env);
+	ft_putstr_fd("bash: ", 2);
+	perr(cmd[0], 1);
 }
 
 void	last_cmdh_null(t_pip *pip, int *pfd, int ac)
@@ -33,7 +33,8 @@ void	last_cmdh_null(t_pip *pip, int *pfd, int ac)
 	char	**cmd;
 
 	fd2 = open(pip->av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	if (access(pip->av[ac - 1], F_OK) == -1 || access(pip->av[ac - 1], R_OK) == -1)
+	if (access(pip->av[ac - 1], F_OK) == -1 || access(pip->av[ac - 1], R_OK) ==
+		-1)
 	{
 		ft_putstr_fd("bash: ", 2);
 		perror(pip->av[ac - 1]);
@@ -41,8 +42,8 @@ void	last_cmdh_null(t_pip *pip, int *pfd, int ac)
 	}
 	dup2(pfd[pip->index_pip - 2], 0);
 	dup2(pip->fd2, 1);
-    close(pip->pfd1[0]);
-    close(pip->pfd1[1]);
+	close(pip->pfd1[0]);
+	close(pip->pfd1[1]);
 	close(pip->fd2);
 	ft_close(pfd, pip->nbr_pip);
 	cmd = ft_split(pip->av[pip->index_av], ' ');
@@ -58,8 +59,8 @@ void	mid_cmdh_null(t_pip *pip, int *pfd)
 
 	dup2(pfd[pip->index_pip - 2], 0);
 	dup2(pfd[pip->index_pip + 1], 1);
-    close(pip->pfd1[0]);
-    close(pip->pfd1[1]);
+	close(pip->pfd1[0]);
+	close(pip->pfd1[1]);
 	ft_close(pfd, pip->nbr_pip);
 	cmd = ft_split(pip->av[pip->index_av], ' ');
 	execve(cmd[0], cmd, pip->env);
@@ -70,7 +71,7 @@ void	mid_cmdh_null(t_pip *pip, int *pfd)
 
 void	env_here_doc_null(t_pip *pip, int *pid, int *pfd, int ac)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (pip->index_av < ac - 1)

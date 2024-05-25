@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 21:13:26 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/12 09:43:20 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/23 05:17:56 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strnstr(const char *s, const char *to_find, size_t len)
 {
-	size_t i;
-	size_t j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	if (!s && len == 0)
@@ -34,21 +34,20 @@ char	*ft_strnstr(const char *s, const char *to_find, size_t len)
 	return (0);
 }
 
-int vide(char *av)
+int	vide(char *av)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
-	while(av[i])
+	while (av[i])
 	{
-		if(av[i] == ' ')
+		if (av[i] == ' ')
 			j++;
 		i++;
 	}
-	
-	if(j == ft_strlen(av))
+	if (j == ft_strlen(av))
 		return (1);
 	return (0);
 }

@@ -12,18 +12,18 @@
 
 #include "pipex.h"
 
-void	perr(char *str,int value)
+void	perr(char *str, int value)
 {
 	perror(str);
 	exit(value);
 }
 
-int	ft_strcmp(char *s1,  char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
 	size_t	i;
 
 	i = 0;
-	while (s2[i] == '\n' ||((s1[i] == s2[i]) && s1[i] && s2[i]))
+	while (s2[i] == '\n' || ((s1[i] == s2[i]) && s1[i] && s2[i]))
 	{
 		i++;
 	}

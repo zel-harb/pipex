@@ -62,5 +62,3 @@ void	count_pipe(t_pip *pip, int ac)
 	else
 		pip->nbr_pip = (nbr / 2) + 1;
 }
-
-
