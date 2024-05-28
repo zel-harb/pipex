@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 19:04:26 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/19 20:00:35 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/26 02:24:43 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,12 @@ int	find(char *av)
 	v = ft_split(av, ' ');
 	if (access(v[0], X_OK) == 0)
 	{
+		ft_free(v,count_words(av,' '));
 		return (0);
 	}
 	else
+	{
+		ft_free(v,count_words(av,' '));
 		return (1);
+	}
 }

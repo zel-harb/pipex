@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:41:42 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/20 23:05:23 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/26 03:26:26 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,17 @@ void	help(t_pip *pip, char **cmd, int value)
 {
 	char	*res;
 
-	found_cmd(pip->path_env, pip, cmd[0]);
+	if (found_cmd(pip->path_env, pip, cmd[0]) == 1)
+	{
+		ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
+	 	ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
+		exit(127);
+	}
 	res = ft_strjoin(ft_strjoin(pip->path, "/"),cmd[0]);
 	execve(res, cmd, pip->env);
 	perror(cmd[0]);
+	ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
+	ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
 	exit(value);
 }
 void	status(t_pip *pip, char **cmd, int i, int value)
@@ -36,7 +43,11 @@ void	status(t_pip *pip, char **cmd, int i, int value)
 	}
 	else if (ft_strncmp(pip->av[i], "/", 1) == 0 || ft_strncmp(pip->av[i], "./",
 			2) == 0)
+	{
+		ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
+		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
 		perr(pip->av[i], value);
+	}
 }
 void	first_cmd(t_pip *pip, int *pfd)
 {
@@ -46,6 +57,7 @@ void	first_cmd(t_pip *pip, int *pfd)
 	if (access(pip->av[1], F_OK) == -1 || access(pip->av[1], R_OK) == -1)
 	{
 		ft_putstr_fd("bash: ", 2);
+		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
 		perr(pip->av[1], 1);
 	}
 	else
@@ -70,6 +82,7 @@ void	last_cmd(t_pip *pip, int *pfd, int ac)
 		-1)
 	{
 		ft_putstr_fd("bash: ", 2);
+		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
 		perror(pip->av[ac - 1]);
 		exit(1);
 	}

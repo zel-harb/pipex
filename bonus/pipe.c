@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:28:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/23 06:52:10 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/26 04:38:24 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	pip_pipe(t_pip pip, int *pfd)
 
 void	full_pipe(t_pip *pip, char **av, int ac, char **env)
 {
-	if (ac > 5 || ac < 5)
+	if (ac < 5)
 	{
 		ft_putstr_fd("More/less arguments\n", 2);
 		exit(1);
@@ -71,7 +71,9 @@ int	ft_cmp(char *s1, char *name_moves)
 	while (name_moves[i])
 	{
 		if (name_moves[i] != s1[i] && name_moves[i] != '\n')
+		{
 			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -84,9 +86,12 @@ void	write_pipe(t_pip *pip)
 	while (len && ft_cmp(pip->av[2], len) != 0)
 	{
 		write(pip->pfd1[1], len, ft_strlen(len));
+		free(len);
 		len = get_next_line(0);
 	}
+	free(len);
 }
+
 void	here_close_wait(t_pip *pip)
 {
 	close(pip->pfd1[0]);

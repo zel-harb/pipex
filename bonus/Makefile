@@ -14,7 +14,8 @@ SOURCES = main_bonus.c \
 		  get_next_line_use.c \
 		  here_doc.c	\
 		  pipe.c \
-		  here_doc_null.c
+		  here_doc_null.c \
+		  cmd_exp.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

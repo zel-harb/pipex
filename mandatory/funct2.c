@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 21:11:18 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/23 07:04:45 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/26 03:14:25 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,12 @@ void	check_pip(t_pip *pip)
 
 void	perr(char *str)
 {
+	write(2, ">>> here: ", 9);
+	write(2, str, ft_strlen(str));
+	write(2, "\n", 1);
 	ft_putstr_fd("bash : ", 2);
-	perror(str);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": no such file or ..\n",2);
 }
 
 void	close_wait(t_pip *pip)

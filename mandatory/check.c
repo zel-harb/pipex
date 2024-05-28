@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:16:25 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/25 03:47:42 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/26 02:57:53 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ void	ft_output(char *str, char *res)
 	char	*res1;
 	char 	*res2;
 
+	ft_putstr_fd("str: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("\n", 2);
 	res1 = ft_strjoin("bash : ", str);
 	res2 = ft_strjoin(res1, res);
 	ft_putstr_fd(res2, 2);

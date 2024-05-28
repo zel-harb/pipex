@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:58:10 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/20 22:55:03 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/26 09:15:45 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	last_cmdh(t_pip *pip, int *pfd, int ac)
 	{
 		ft_putstr_fd("bash: ", 2);
 		perror(pip->av[ac - 1]);
+		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
 		exit(1);
 	}
 	dup2(pfd[pip->index_pip - 2], 0);
