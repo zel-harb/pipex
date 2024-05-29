@@ -16,7 +16,7 @@ void	full_pip(t_pip *pip, char **av)
 {
 	pip->cmd1 = ft_split(av[2], ' ');
 	pip->cmd2 = ft_split(av[3], ' ');
-	pip->av = av ;
+	pip->av = av;
 	pip->value = 0;
 }
 
@@ -47,12 +47,12 @@ int	find(char *av)
 	v = ft_split(av, ' ');
 	if (access(v[0], X_OK) == 0)
 	{
-		ft_free(v,count_words(av,' '));
+		ft_free(v, count_words(av, ' '));
 		return (0);
 	}
 	else
 	{
-		ft_free(v,count_words(av,' '));
+		ft_free(v, count_words(av, ' '));
 		return (1);
 	}
 }

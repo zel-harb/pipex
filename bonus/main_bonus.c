@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/28 10:19:12 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/28 21:47:14 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,36 +25,42 @@ int	main(int ac, char **av, char **env)
 		pipe(pip.pfd1);
 		write_pipe(&pip);
 		pip.index_av = pip.index_av + 1;
-		if (pip.path_env == NULL || !pip.path_env[0])
-			env_null(&pip, pid, pfd, ac);
+		if (pip.path_env == NULL)
+		{
+			// env_null(&pip, pid, pfd, ac);
+			// dprintf(2, "klsajksaajmxzasl");
+			env_here_doc_null(&pip, pid, pfd, ac);
+			here_close_wait(&pip);
+		}
 		else
 		{
+			// dprintf(2,"hiii\n");
 			all_here(&pip, pid, pfd, ac);
-		here_close_wait(&pip);
-		ft_free(pip.path_env,count_words(get_path(env),':'));
+			here_close_wait(&pip);
+			ft_free(pip.path_env, count_words(get_path(env), ':'));
 		}
-		here_close_wait(&pip);
+		// here_close_wait(&pip);
+		return (pip.value >> 8);
 	}
-	else if (pip.path_env == NULL )
+	else if (pip.path_env == NULL)
 	{
 		env_null(&pip, pid, pfd, ac);
 		ft_close(pfd, pip.nbr_pip);
 		wait_pid(pid, ac, &pip);
 	}
-	else if(!pip.path_env[0])
+	else if (!pip.path_env[0])
 	{
 		env_null_exp(&pip, pid, pfd, ac);
 		ft_close(pfd, pip.nbr_pip);
 		wait_pid(pid, ac, &pip);
-		ft_free(pip.path_env,count_words(get_path(env),':'));
+		ft_free(pip.path_env, count_words(get_path(env), ':'));
 	}
 	else
 	{
 		all_cmd(&pip, pid, pfd, ac);
 		ft_close(pfd, pip.nbr_pip);
 		wait_pid(pid, ac, &pip);
-		ft_free(pip.path_env,count_words(get_path(env),':'));
+		ft_free(pip.path_env, count_words(get_path(env), ':'));
 	}
-		
 	return (pip.value >> 8);
 }

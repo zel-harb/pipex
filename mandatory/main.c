@@ -44,7 +44,6 @@ int	main(int ac, char **av, char **env)
 		pip.pid = fork();
 		null_env(av, &pip, env);
 		ft_free(pip.path_env, count_words(get_path(pip.env), ':'));
-		
 	}
 	else
 	{

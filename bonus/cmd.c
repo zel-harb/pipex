@@ -19,10 +19,10 @@ void	help(t_pip *pip, char **cmd, int value)
 	if (found_cmd(pip->path_env, pip, cmd[0]) == 1)
 	{
 		ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
-	 	ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
+		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
 		exit(127);
 	}
-	res = ft_strjoin(ft_strjoin(pip->path, "/"),cmd[0]);
+	res = ft_strjoin(ft_strjoin(pip->path, "/"), cmd[0]);
 	execve(res, cmd, pip->env);
 	perror(cmd[0]);
 	ft_free(cmd, count_words(pip->av[pip->index_av], ' '));

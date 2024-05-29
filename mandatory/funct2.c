@@ -45,7 +45,7 @@ void	perr(char *str)
 	write(2, "\n", 1);
 	ft_putstr_fd("bash : ", 2);
 	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": no such file or ..\n",2);
+	ft_putstr_fd(": no such file or ..\n", 2);
 }
 
 void	close_wait(t_pip *pip)

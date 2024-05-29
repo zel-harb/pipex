@@ -34,7 +34,7 @@ int	count(char **s)
 void	ft_output(char *str, char *res)
 {
 	char	*res1;
-	char 	*res2;
+	char	*res2;
 
 	ft_putstr_fd("str: ", 2);
 	ft_putstr_fd(str, 2);
@@ -49,7 +49,7 @@ void	ft_output(char *str, char *res)
 void	found_cmd(char **str, t_pip *pip, char *var)
 {
 	char	*res;
-	char *res2;
+	char	*res2;
 	int		i;
 	int		j;
 
@@ -69,7 +69,7 @@ void	found_cmd(char **str, t_pip *pip, char *var)
 				free(res2);
 				ft_free(pip->cmd1, count_words(pip->av[2], ' '));
 				ft_free(pip->cmd2, count_words(pip->av[3], ' '));
-	 			ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
+				ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
 				exit(127);
 			}
 		}

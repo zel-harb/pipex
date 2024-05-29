@@ -26,8 +26,8 @@ typedef struct s_pip
 	char	*path;
 	int		pfd[2];
 	char	**path_env;
-	char **av;
-	char **env;
+	char	**av;
+	char	**env;
 	pid_t	pid;
 	pid_t	pid1;
 	int		value;

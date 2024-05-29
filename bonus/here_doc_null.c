@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:03:46 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/20 17:07:19 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/28 21:47:01 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ void	first_cmdh_null(t_pip *pip, int *pfd)
 	close(pip->pfd1[0]);
 	close(pip->pfd1[1]);
 	ft_close(pfd, pip->nbr_pip);
-	cmd = ft_split(pip->av[2], ' ');
+	cmd = ft_split(pip->av[3], ' ');
 	execve(cmd[0], cmd, pip->env);
 	ft_putstr_fd("bash: ", 2);
-	perr(cmd[0], 1);
+	perror(cmd[0]);
+	// ft_free(cmd, count_words(pip->av[3], ' '));
+	exit(1);
 }
-
 void	last_cmdh_null(t_pip *pip, int *pfd, int ac)
 {
-	int		fd2;
 	char	**cmd;
 
-	fd2 = open(pip->av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	pip->fd2 = open(pip->av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (access(pip->av[ac - 1], F_OK) == -1 || access(pip->av[ac - 1], R_OK) ==
 		-1)
 	{
@@ -52,9 +52,9 @@ void	last_cmdh_null(t_pip *pip, int *pfd, int ac)
 	perror(cmd[0]);
 	exit(127);
 }
-
 void	mid_cmdh_null(t_pip *pip, int *pfd)
 {
+	char	*res;
 	char	**cmd;
 
 	dup2(pfd[pip->index_pip - 2], 0);
@@ -79,15 +79,19 @@ void	env_here_doc_null(t_pip *pip, int *pid, int *pfd, int ac)
 		pid[i] = fork();
 		if (pid[i] == 0)
 		{
-			if (pip->index_av == 2)
+			if (pip->index_av == 3)
 				first_cmdh_null(pip, pfd);
 			else if (pip->index_av == ac - 2)
 				last_cmdh_null(pip, pfd, ac);
 			else
 				mid_cmdh_null(pip, pfd);
 		}
+		// here_close_wait(pip);
+		int status = 0;
+		waitpid(pid[i], &pip->value, 0);
 		pip->index_pip += 2;
 		pip->index_av++;
 		i++;
 	}
+	exit(pip->value >> 8);
 }

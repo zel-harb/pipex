@@ -50,7 +50,7 @@ void	help_cmd2(t_pip *pip, int fd, char **env, char **av)
 		ft_output(av[3], "  : command not found \n");
 		exit(127);
 	}
-	 if (find(av[3]) == 0)
+	if (find(av[3]) == 0)
 	{
 		execve(pip->cmd2[0], pip->cmd2, env);
 		perror(av[3]);

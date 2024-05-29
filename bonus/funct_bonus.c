@@ -39,12 +39,12 @@ int	find(char *av)
 	v = ft_split(av, ' ');
 	if (access(v[0], X_OK) == 0)
 	{
-		ft_free(v,count_words(av,' '));
+		ft_free(v, count_words(av, ' '));
 		return (0);
 	}
 	else
 	{
-		ft_free(v,count_words(av,' '));
+		ft_free(v, count_words(av, ' '));
 		return (1);
 	}
 }

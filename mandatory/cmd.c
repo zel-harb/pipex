@@ -59,7 +59,7 @@ void	child_cmd4(char **av, t_pip *pip, char **env)
 			ft_putstr_fd("bash: ", 2);
 			perror(av[4]);
 			if (!pip->path_env[0])
-			ft_free(pip->path_env, count_words(get_path(env), ':'));
+				ft_free(pip->path_env, count_words(get_path(env), ':'));
 			exit(1);
 		}
 		dup2(pip->pfd[0], 0);

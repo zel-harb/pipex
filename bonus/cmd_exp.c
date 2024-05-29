@@ -21,12 +21,11 @@ void	first_cmd_exp(t_pip *pip, int *pfd)
 	if (access(pip->av[1], F_OK) == -1 || access(pip->av[1], R_OK) == -1)
 	{
 		ft_putstr_fd("bash: ", 2);
-		//perr(pip->av[1], 1);
+		// perr(pip->av[1], 1);
 		perror(pip->av[1]);
-		if(!pip->path_env[0])
-	 	ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
+		if (!pip->path_env[0])
+			ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
 		exit(1);
-		
 	}
 	else
 	{
@@ -37,13 +36,12 @@ void	first_cmd_exp(t_pip *pip, int *pfd)
 		cmd = ft_split(pip->av[2], ' ');
 		execve(cmd[0], cmd, pip->env);
 		ft_putstr_fd("bash: ", 2);
-		//perr(cmd[0], 1);
+		// perr(cmd[0], 1);
 		perror(cmd[0]);
 		ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
-		if(!pip->path_env[0])
-	 		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
+		if (!pip->path_env[0])
+			ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
 		exit(1);
-		
 	}
 }
 
@@ -58,8 +56,8 @@ void	last_cmd_exp(t_pip *pip, int *pfd, int ac)
 	{
 		ft_putstr_fd("bash: ", 2);
 		perror(pip->av[ac - 1]);
-		if(!pip->path_env[0])
-		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
+		if (!pip->path_env[0])
+			ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
 		exit(1);
 	}
 	dup2(pfd[pip->index_pip - 2], 0);
@@ -71,8 +69,8 @@ void	last_cmd_exp(t_pip *pip, int *pfd, int ac)
 	ft_putstr_fd("bash: ", 2);
 	perror(cmd[0]);
 	ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
-	if(!pip->path_env[0])
-	ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
+	if (!pip->path_env[0])
+		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
 	exit(127);
 }
 
@@ -88,14 +86,14 @@ void	mid_cmd_exp(t_pip *pip, int *pfd)
 	ft_putstr_fd("bash: ", 2);
 	perror(cmd[0]);
 	ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
-	if(!pip->path_env[0])
+	if (!pip->path_env[0])
 		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
 	exit(1);
 }
 
 void	env_null_exp(t_pip *pip, int *pid, int *pfd, int ac)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (pip->index_av < ac - 1)

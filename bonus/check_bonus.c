@@ -33,10 +33,10 @@ int	count(char **s)
 
 int	found_cmd(char **str, t_pip *pip, char *var)
 {
-	char	*res;
-	char	*res2;
-	int		i;
-	int		j;
+	char *res;
+	char *res2;
+	int i;
+	int j;
 
 	i = 0;
 	j = 0;
@@ -44,7 +44,7 @@ int	found_cmd(char **str, t_pip *pip, char *var)
 	{
 		res = ft_strjoin(str[i], "/");
 		res2 = ft_strjoin(res, var);
-		if (access(res2 ,X_OK) != 0)
+		if (access(res2, X_OK) != 0)
 		{
 			j++;
 			if (j == count(str))
@@ -52,7 +52,7 @@ int	found_cmd(char **str, t_pip *pip, char *var)
 				free(res);
 				free(res2);
 				ft_putstr_fd("bash : command not found\n", 2);
-				return 1;
+				return (1);
 			}
 		}
 		else
@@ -60,11 +60,12 @@ int	found_cmd(char **str, t_pip *pip, char *var)
 			pip->path = str[i];
 			free(res);
 			free(res2);
-			return 0;
+			return (0);
 		}
 		free(res);
-		free(res2);;
+		free(res2);
+		;
 		i++;
 	}
-	return 0;
+	return (0);
 }

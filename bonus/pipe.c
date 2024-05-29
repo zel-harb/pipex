@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:28:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/26 04:38:24 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/28 21:32:42 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,13 @@ void	write_pipe(t_pip *pip)
 	char	*len;
 
 	len = get_next_line(0);
+	dprintf(2, ">");
 	while (len && ft_cmp(pip->av[2], len) != 0)
 	{
 		write(pip->pfd1[1], len, ft_strlen(len));
 		free(len);
 		len = get_next_line(0);
+		dprintf(2, ">");
 	}
 	free(len);
 }
