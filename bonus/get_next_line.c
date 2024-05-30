@@ -98,7 +98,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
-		if(str != NULL)
+		if (str != NULL)
 			free(str);
 		str = NULL;
 		return (NULL);
