@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:28:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/28 21:32:42 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:18:45 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,19 @@ int	ft_cmp(char *s1, char *name_moves)
 void	write_pipe(t_pip *pip)
 {
 	char	*len;
-
+	write(1,">",2);
 	len = get_next_line(0);
-	dprintf(2, ">");
 	while (len && ft_cmp(pip->av[2], len) != 0)
 	{
 		write(pip->pfd1[1], len, ft_strlen(len));
 		free(len);
+		write(1,">",2);
 		len = get_next_line(0);
-		dprintf(2, ">");
+		
 	}
 	free(len);
+	get_next_line(-1);
+	//return ;
 }
 
 void	here_close_wait(t_pip *pip)

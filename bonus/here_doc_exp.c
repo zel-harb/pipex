@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   here_doc_null.c                                    :+:      :+:    :+:   */
+/*   here_doc_exp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/20 17:03:46 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/29 15:06:06 by zel-harb         ###   ########.fr       */
+/*   Created: 2024/05/29 15:48:47 by zel-harb          #+#    #+#             */
+/*   Updated: 2024/05/29 15:52:35 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	first_cmdh_null(t_pip *pip, int *pfd)
+void	first_cmdh_exp(t_pip *pip, int *pfd)
 {
 	char	**cmd;
 
@@ -26,9 +26,10 @@ void	first_cmdh_null(t_pip *pip, int *pfd)
 	ft_putstr_fd("bash: ", 2);
 	perror(cmd[0]);
 	ft_free(cmd, count_words(pip->av[3], ' '));
+    ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
 	exit(1);
 }
-void	last_cmdh_null(t_pip *pip, int *pfd, int ac)
+void	last_cmdh_exp(t_pip *pip, int *pfd, int ac)
 {
 	char	**cmd;
 
@@ -51,9 +52,10 @@ void	last_cmdh_null(t_pip *pip, int *pfd, int ac)
 	ft_putstr_fd("bash: ", 2);
 	perror(cmd[0]);
 	ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
+    ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
 	exit(127);
 }
-void	mid_cmdh_null(t_pip *pip, int *pfd)
+void	mid_cmdh_exp(t_pip *pip, int *pfd)
 {
 	char	*res;
 	char	**cmd;
@@ -68,10 +70,11 @@ void	mid_cmdh_null(t_pip *pip, int *pfd)
 	ft_putstr_fd("bash: ", 2);
 	perror(cmd[0]);
 	ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
+    ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
 	exit(1);
 }
 
-void	env_here_doc_null(t_pip *pip, int *pid, int *pfd, int ac)
+void	env_here_doc_exp(t_pip *pip, int *pid, int *pfd, int ac)
 {
 	int i;
 
@@ -82,15 +85,14 @@ void	env_here_doc_null(t_pip *pip, int *pid, int *pfd, int ac)
 		if (pid[i] == 0)
 		{
 			if (pip->index_av == 3)
-				first_cmdh_null(pip, pfd);
+				first_cmdh_exp(pip, pfd);
 			else if (pip->index_av == ac - 2)
-				last_cmdh_null(pip, pfd, ac);
+				last_cmdh_exp(pip, pfd, ac);
 			else
-				mid_cmdh_null(pip, pfd);
+				mid_cmdh_exp(pip, pfd);
 		}
 		pip->index_pip += 2;
 		pip->index_av++;
 		i++;
 	}
 }
-

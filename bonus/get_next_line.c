@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 22:59:23 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/26 09:21:03 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:11:24 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,12 @@ char	*get_next_line(int fd)
 	char		*s_str;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
+	{
+		if(str != NULL)
+			free(str);
+		str = NULL;
 		return (NULL);
+	}
 	str = to_read(fd, str);
 	if (!str)
 		return (NULL);

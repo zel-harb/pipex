@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:28 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/27 00:34:12 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/05/29 15:51:11 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ void		help(t_pip *pip, char **cmd, int value);
 void		status(t_pip *pip, char **cmd, int i, int value);
 void		env_here_doc_null(t_pip *pip, int *pid, int *pfd, int ac);
 void		env_null_exp(t_pip *pip, int *pid, int *pfd, int ac);
+void		env_here_doc_exp(t_pip *pip, int *pid, int *pfd, int ac);
 
 #endif
