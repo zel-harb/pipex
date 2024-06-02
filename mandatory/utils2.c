@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 21:13:26 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/23 05:17:56 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/02 14:02:25 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,15 @@ int	vide(char *av)
 	if (j == ft_strlen(av))
 		return (1);
 	return (0);
+}
+
+char	*double_strj(char *str, char *var)
+{
+	char	*res2;
+	char	*res;
+
+	res = ft_strjoin(str, "/");
+	res2 = ft_strjoin(res, var);
+	free(res);
+	return (res2);
 }

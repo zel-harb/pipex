@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/25 05:47:53 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/02 13:26:16 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ void	cmd(t_pip *pip, char **av, char **env)
 	close_wait(pip);
 }
 
+void	fork_null(t_pip *pip, char **av, char **env, int k)
+{
+	pip->pid = fork();
+	null_env(av, pip, env, k);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_pip	pip;
@@ -35,14 +41,10 @@ int	main(int ac, char **av, char **env)
 	pip.path_env = ft_split(get_path(env), ':');
 	pip.env = env;
 	if (!pip.path_env)
-	{
-		pip.pid = fork();
-		null_env(av, &pip, env);
-	}
+		fork_null(&pip, av, env, 0);
 	else if (!pip.path_env[0])
 	{
-		pip.pid = fork();
-		null_env(av, &pip, env);
+		fork_null(&pip, av, env, 1);
 		ft_free(pip.path_env, count_words(get_path(pip.env), ':'));
 	}
 	else

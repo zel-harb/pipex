@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:16:25 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/26 02:57:53 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/02 14:03:29 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,19 @@ void	ft_output(char *str, char *res)
 	free(res2);
 }
 
+void	free_cnf(t_pip *pip, char *res, char *var)
+{
+	ft_output(var, " : command not found \n");
+	free(res);
+	ft_free(pip->cmd1, count_words(pip->av[2], ' '));
+	ft_free(pip->cmd2, count_words(pip->av[3], ' '));
+	ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
+	exit(127);
+}
+
 void	found_cmd(char **str, t_pip *pip, char *var)
 {
 	char	*res;
-	char	*res2;
 	int		i;
 	int		j;
 
@@ -57,31 +66,20 @@ void	found_cmd(char **str, t_pip *pip, char *var)
 	j = 0;
 	while (str[i])
 	{
-		res = ft_strjoin(str[i], "/");
-		res2 = ft_strjoin(res, var);
-		if (access(res2, X_OK) != 0)
+		res = double_strj(str[i], var);
+		if (access(res, X_OK) != 0)
 		{
 			j++;
 			if (j == count(str))
-			{
-				ft_output(var, " : command not found \n");
-				free(res);
-				free(res2);
-				ft_free(pip->cmd1, count_words(pip->av[2], ' '));
-				ft_free(pip->cmd2, count_words(pip->av[3], ' '));
-				ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
-				exit(127);
-			}
+				free_cnf(pip, res, var);
 		}
 		else
 		{
 			pip->path = str[i];
 			free(res);
-			free(res2);
 			return ;
 		}
 		free(res);
-		free(res2);
 		i++;
 	}
 }
