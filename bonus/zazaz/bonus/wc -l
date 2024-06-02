@@ -1,0 +1,18 @@
+check_bonus.c
+check_bonus.o
+funct2_bonus.c
+funct2_bonus.o
+funct_bonus.c
+funct_bonus.o
+main_bonus.c
+main_bonus.o
+Makefile
+pipex
+pipex.h
+split_bonus.c
+split_bonus.o
+utils2_bonus.c
+utils2_bonus.o
+utils_bonus.c
+utils_bonus.o
+wc -l
