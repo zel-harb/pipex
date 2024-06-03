@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/03 13:19:43 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:35:31 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	main(int ac, char **av, char **env)
 	t_pip	pip;
 
 	full_pipe(&pip, av, ac, env);
+	
 	pip_pipe(pip, pip.pfd);
 	if (ft_cmp("here_doc", av[1]) == 0)
 	{
@@ -91,6 +92,9 @@ int	main(int ac, char **av, char **env)
 		here_doc(&pip, ac);
 	}
 	else
+	{
+		
 		mult_pip(&pip, ac);
+	}
 	return (pip.value >> 8);
 }

@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:16:25 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/03 12:59:46 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:15:47 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,17 @@ int	found_cmd(char **str, t_pip *pip, char *var)
 	int		j;
 
 	i = 0;
-	j = 0;
-	while (str[i])
+	j = 1;
+	while (str[++i])
 	{
 		res = str_join(str[i], var);
 		if (access(res, X_OK) != 0)
 		{
-			j++;
-			if (j == count(str))
-				ft_output(var, "bash : command not found\n", res);
-			return (1);
+			if (++j == count(str))
+			{
+				ft_output(var, " : command not found\n", res);
+				return (1);
+			}
 		}
 		else
 		{
@@ -79,7 +80,6 @@ int	found_cmd(char **str, t_pip *pip, char *var)
 			return (0);
 		}
 		free(res);
-		i++;
 	}
 	return (0);
 }
