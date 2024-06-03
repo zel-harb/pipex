@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 22:59:43 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/02 17:38:44 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/03 13:10:53 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ char	*ft_strchr(char *s, int c)
 
 char	*ft_strjoin_line(char *s1, char *s2)
 {
-	size_t i;
-	size_t j;
-	char *str;
+	size_t	i;
+	size_t	j;
+	char	*str;
 
 	i = 0;
 	j = 0;

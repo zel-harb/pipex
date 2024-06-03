@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 21:13:26 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/23 05:17:56 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/03 12:06:57 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,41 @@ int	vide(char *av)
 	if (j == ft_strlen(av))
 		return (1);
 	return (0);
+}
+
+void	free_nfc(t_pip *pip)
+{
+	ft_free(pip->cmd1, count_words(pip->av[2], ' '));
+	ft_free(pip->cmd2, count_words(pip->av[3], ' '));
+	ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
+	exit(127);
+}
+
+void	ft_output_fnc(char *str, char *res, char *res_a, t_pip *pip)
+{
+	char	*res1;
+	char	*res2;
+
+	res1 = ft_strjoin("bash : ", str);
+	res2 = ft_strjoin(res1, res);
+	ft_putstr_fd(res2, 2);
+	free(res1);
+	free(res2);
+	free(res_a);
+	free_nfc(pip);
+}
+
+void	ft_output(char *str, char *res)
+{
+	char	*res1;
+	char	*res2;
+
+	ft_putstr_fd("str: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("\n", 2);
+	res1 = ft_strjoin("bash : ", str);
+	res2 = ft_strjoin(res1, res);
+	ft_putstr_fd(res2, 2);
+	free(res1);
+	free(res2);
 }

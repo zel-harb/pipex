@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 21:13:26 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/19 21:37:30 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:57:11 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,27 @@ void	count_pipe(t_pip *pip, int ac)
 		pip->nbr_pip = nbr / 2;
 	else
 		pip->nbr_pip = (nbr / 2) + 1;
+}
+
+void	save_path(t_pip *pip, char *str, char *res)
+{
+	pip->path = str;
+	free(res);
+}
+
+void	write_pipe(t_pip *pip)
+{
+	char	*len;
+
+	write(1, ">", 2);
+	len = get_next_line(0);
+	while (len && ft_cmp(pip->av[2], len) != 0)
+	{
+		write(pip->pfd1[1], len, ft_strlen(len));
+		free(len);
+		write(1, ">", 2);
+		len = get_next_line(0);
+	}
+	free(len);
+	get_next_line(-1);
 }

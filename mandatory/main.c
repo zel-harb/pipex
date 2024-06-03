@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/25 05:47:53 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/03 12:06:13 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,26 @@ void	cmd(t_pip *pip, char **av, char **env)
 	close_wait(pip);
 }
 
+void	all_fnc(t_pip *pip, char **av)
+{
+	if (!pip->path_env)
+	{
+		pip->pid = fork();
+		null_env(av, pip, pip->env);
+	}
+	else if (!pip->path_env[0])
+	{
+		pip->pid = fork();
+		null_env(av, pip, pip->env);
+		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
+	}
+	else
+	{
+		cmd(pip, av, pip->env);
+		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
+	}
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_pip	pip;
@@ -34,22 +54,6 @@ int	main(int ac, char **av, char **env)
 	pipe(pip.pfd);
 	pip.path_env = ft_split(get_path(env), ':');
 	pip.env = env;
-	if (!pip.path_env)
-	{
-		pip.pid = fork();
-		null_env(av, &pip, env);
-	}
-	else if (!pip.path_env[0])
-	{
-		pip.pid = fork();
-		null_env(av, &pip, env);
-		ft_free(pip.path_env, count_words(get_path(pip.env), ':'));
-		
-	}
-	else
-	{
-		cmd(&pip, av, env);
-		ft_free(pip.path_env, count_words(get_path(env), ':'));
-	}
+	all_fnc(&pip, av);
 	return (pip.value >> 8);
 }

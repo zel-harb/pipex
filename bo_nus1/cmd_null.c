@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 19:53:28 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/02 17:38:31 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/03 13:10:14 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	first_cmd_null(t_pip *pip, int *pfd)
 		ft_putstr_fd("bash: ", 2);
 		perror(pip->av[1]);
 		exit(1);
-		
 	}
 	else
 	{
@@ -37,7 +36,6 @@ void	first_cmd_null(t_pip *pip, int *pfd)
 		perror(cmd[0]);
 		ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
 		exit(1);
-		
 	}
 }
 
@@ -45,10 +43,11 @@ void	last_cmd_null(t_pip *pip, int *pfd, int ac)
 {
 	int		fd2;
 	char	**cmd;
+	char	*av;
 
 	fd2 = open(pip->av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	if (access(pip->av[ac - 1], F_OK) == -1 || access(pip->av[ac - 1], R_OK) ==
-		-1)
+	av = pip->av[ac - 1];
+	if (access(av, F_OK) == -1 || access(av, R_OK) == -1)
 	{
 		ft_putstr_fd("bash: ", 2);
 		perror(pip->av[ac - 1]);

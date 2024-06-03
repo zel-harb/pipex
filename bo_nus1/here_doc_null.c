@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:03:46 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/02 17:43:36 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/03 13:13:52 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ void	last_cmdh_null(t_pip *pip, int *pfd, int ac)
 {
 	int		fd2;
 	char	**cmd;
+	char	*av;
 
 	fd2 = open(pip->av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	if (access(pip->av[ac - 1], F_OK) == -1 || access(pip->av[ac - 1], R_OK) ==
-		-1)
+	av = pip->av[ac - 1];
+	if (access(av, F_OK) == -1 || access(av, R_OK) == -1)
 	{
 		ft_putstr_fd("bash: ", 2);
 		perror(pip->av[ac - 1]);
@@ -71,7 +72,7 @@ void	mid_cmdh_null(t_pip *pip, int *pfd)
 
 void	env_here_doc_null(t_pip *pip, int *pid, int *pfd, int ac)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (pip->index_av < ac - 1)

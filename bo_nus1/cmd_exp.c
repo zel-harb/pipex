@@ -6,11 +6,17 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 00:36:56 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/27 00:37:12 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/03 13:09:04 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	check_free(t_pip *pip)
+{
+	if (!pip->path_env[0])
+		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
+}
 
 void	first_cmd_exp(t_pip *pip, int *pfd)
 {
@@ -21,12 +27,9 @@ void	first_cmd_exp(t_pip *pip, int *pfd)
 	if (access(pip->av[1], F_OK) == -1 || access(pip->av[1], R_OK) == -1)
 	{
 		ft_putstr_fd("bash: ", 2);
-		//perr(pip->av[1], 1);
 		perror(pip->av[1]);
-		if(!pip->path_env[0])
-	 	ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
+		check_free(pip);
 		exit(1);
-		
 	}
 	else
 	{
@@ -37,13 +40,10 @@ void	first_cmd_exp(t_pip *pip, int *pfd)
 		cmd = ft_split(pip->av[2], ' ');
 		execve(cmd[0], cmd, pip->env);
 		ft_putstr_fd("bash: ", 2);
-		//perr(cmd[0], 1);
 		perror(cmd[0]);
 		ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
-		if(!pip->path_env[0])
-	 		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
+		check_free(pip);
 		exit(1);
-		
 	}
 }
 
@@ -51,15 +51,15 @@ void	last_cmd_exp(t_pip *pip, int *pfd, int ac)
 {
 	int		fd2;
 	char	**cmd;
+	char	*av;
 
 	fd2 = open(pip->av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	if (access(pip->av[ac - 1], F_OK) == -1 || access(pip->av[ac - 1], R_OK) ==
-		-1)
+	av = pip->av[ac - 1];
+	if (access(av, F_OK) == -1 || access(av, R_OK) == -1)
 	{
 		ft_putstr_fd("bash: ", 2);
 		perror(pip->av[ac - 1]);
-		if(!pip->path_env[0])
-		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
+		check_free(pip);
 		exit(1);
 	}
 	dup2(pfd[pip->index_pip - 2], 0);
@@ -71,8 +71,7 @@ void	last_cmd_exp(t_pip *pip, int *pfd, int ac)
 	ft_putstr_fd("bash: ", 2);
 	perror(cmd[0]);
 	ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
-	if(!pip->path_env[0])
-	ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
+	check_free(pip);
 	exit(127);
 }
 
@@ -88,7 +87,7 @@ void	mid_cmd_exp(t_pip *pip, int *pfd)
 	ft_putstr_fd("bash: ", 2);
 	perror(cmd[0]);
 	ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
-	if(!pip->path_env[0])
+	if (!pip->path_env[0])
 		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
 	exit(1);
 }

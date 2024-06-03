@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:16:25 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/27 15:48:20 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/03 12:59:46 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,33 @@ int	count(char **s)
 	return (i);
 }
 
-int	found_cmd(char **str, t_pip *pip, char *var)
+void	ft_output(char *str, char *res, char *res_a)
+{
+	char	*res1;
+	char	*res2;
+
+	res1 = ft_strjoin("bash : ", str);
+	res2 = ft_strjoin(res1, res);
+	ft_putstr_fd(res2, 2);
+	free(res1);
+	free(res2);
+	free(res_a);
+}
+
+char	*str_join(char *str, char *var)
 {
 	char	*res;
 	char	*res2;
+
+	res = ft_strjoin(str, "/");
+	res2 = ft_strjoin(res, var);
+	free(res);
+	return (res2);
+}
+
+int	found_cmd(char **str, t_pip *pip, char *var)
+{
+	char	*res;
 	int		i;
 	int		j;
 
@@ -42,29 +65,21 @@ int	found_cmd(char **str, t_pip *pip, char *var)
 	j = 0;
 	while (str[i])
 	{
-		res = ft_strjoin(str[i], "/");
-		res2 = ft_strjoin(res, var);
-		if (access(res2 ,X_OK) != 0)
+		res = str_join(str[i], var);
+		if (access(res, X_OK) != 0)
 		{
 			j++;
 			if (j == count(str))
-			{
-				free(res);
-				free(res2);
-				ft_putstr_fd("bash : command not found\n", 2);
-				return 1;
-			}
+				ft_output(var, "bash : command not found\n", res);
+			return (1);
 		}
 		else
 		{
-			pip->path = str[i];
-			free(res);
-			free(res2);
-			return 0;
+			save_path(pip, str[i], res);
+			return (0);
 		}
 		free(res);
-		free(res2);;
 		i++;
 	}
-	return 0;
+	return (0);
 }

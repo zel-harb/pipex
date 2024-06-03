@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:28 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/25 03:35:24 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/03 11:52:15 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ typedef struct s_pip
 	char	*path;
 	int		pfd[2];
 	char	**path_env;
-	char **av;
-	char **env;
+	char	**av;
+	char	**env;
 	pid_t	pid;
 	pid_t	pid1;
 	int		value;
@@ -60,5 +60,8 @@ void		child_cmd2(char **av, t_pip *pip, char **env);
 void		help_cmd1(t_pip *pip, int fd, char **env, char **av);
 void		help_cmd2(t_pip *pip, int fd, char **env, char **av);
 int			vide(char *av);
+void		ft_output_fnc(char *str, char *res, char *res_a, t_pip *pip);
 void		ft_output(char *str, char *res);
+
+void		free_nfc(t_pip *pip);
 #endif

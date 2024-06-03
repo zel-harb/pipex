@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 18:00:07 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/02 17:43:07 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:56:59 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ static char	**set_word(const char *str, char c, int l)
 
 char	**ft_split(char const *s, char c)
 {
-	char **word;
-	int len;
+	char	**word;
+	int		len;
 
 	if (s == NULL)
 		return (NULL);

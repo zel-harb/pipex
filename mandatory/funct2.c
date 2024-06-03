@@ -6,15 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 21:11:18 by zel-harb          #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   Updated: 2024/06/02 13:19:53 by zel-harb         ###   ########.fr       */
-=======
-/*   Updated: 2024/05/23 07:04:45 by zel-harb         ###   ########.fr       */
->>>>>>> parent of d44faf0 (pipex)
-=======
-/*   Updated: 2024/05/26 03:14:25 by zel-harb         ###   ########.fr       */
->>>>>>> origin/master
+/*   Updated: 2024/06/03 11:50:02 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +45,7 @@ void	perr(char *str)
 	write(2, "\n", 1);
 	ft_putstr_fd("bash : ", 2);
 	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": no such file or ..\n",2);
+	ft_putstr_fd(": no such file or ..\n", 2);
 }
 
 void	close_wait(t_pip *pip)

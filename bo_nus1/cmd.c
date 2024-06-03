@@ -6,53 +6,12 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:41:42 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/02 20:58:24 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/03 13:03:00 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	help(t_pip *pip, char **cmd, int value)
-{
-	char	*res;
-
-	if (found_cmd(pip->path_env, pip, cmd[0]) == 1)
-	{
-		ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
-	 	ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
-		free(pip->pfd);
-		free(pip->pid);
-		exit(127);
-	}
-	res = ft_strjoin(ft_strjoin(pip->path, "/"),cmd[0]);
-	execve(res, cmd, pip->env);
-	perror(cmd[0]);
-	ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
-	ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
-	exit(value);
-}
-void	status(t_pip *pip, char **cmd, int i, int value)
-{
-	if (find(pip->av[i]) == 0)
-	{
-		execve(cmd[0], cmd, pip->env);
-		perr("execve", value);
-	}
-	else if (pip->av[i][0] == '\0' || vide(pip->av[i]) == 1)
-	{
-		ft_putstr_fd("bash : command not found \n", 2);
-		exit(value);
-	}
-	else if (ft_strncmp(pip->av[i], "/", 1) == 0 || ft_strncmp(pip->av[i], "./",
-			2) == 0)
-	{
-		ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
-		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
-		free(pip->pfd);
-		free(pip->pid);
-		perr(pip->av[i], value);
-	}
-}
 void	first_cmd(t_pip *pip, int *pfd)
 {
 	char	**cmd;
@@ -82,10 +41,11 @@ void	last_cmd(t_pip *pip, int *pfd, int ac)
 {
 	char	*res;
 	char	**cmd;
+	char	*av;
 
 	pip->fd2 = open(pip->av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	if (access(pip->av[ac - 1], F_OK) == -1 || access(pip->av[ac - 1], R_OK) ==
-		-1)
+	av = pip->av[ac - 1];
+	if (access(av, F_OK) == -1 || access(av, R_OK) == -1)
 	{
 		ft_putstr_fd("bash: ", 2);
 		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));

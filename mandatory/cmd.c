@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 03:14:03 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/05/25 05:55:37 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/03 11:55:21 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,7 @@ void	child_cmd3(char **av, t_pip *pip, char **env)
 	}
 	else
 	{
-		dup2(fd, 0);
-		dup2(pip->pfd[1], 1);
-		close(fd);
-		close(pip->pfd[1]);
-		close(pip->pfd[0]);
-		full_pip(pip, av);
+		dup_close1(fd, pip, av);
 		execve(pip->cmd1[0], pip->cmd1, env);
 		ft_putstr_fd("bash: ", 2);
 		perror(pip->cmd1[0]);
@@ -59,15 +54,10 @@ void	child_cmd4(char **av, t_pip *pip, char **env)
 			ft_putstr_fd("bash: ", 2);
 			perror(av[4]);
 			if (!pip->path_env[0])
-			ft_free(pip->path_env, count_words(get_path(env), ':'));
+				ft_free(pip->path_env, count_words(get_path(env), ':'));
 			exit(1);
 		}
-		dup2(pip->pfd[0], 0);
-		dup2(fd1, 1);
-		close(fd1);
-		close(pip->pfd[0]);
-		close(pip->pfd[1]);
-		full_pip(pip, av);
+		dup_close2(fd1, pip, av);
 		execve(pip->cmd2[0], pip->cmd2, env);
 		ft_putstr_fd("bash: ", 2);
 		perror(pip->cmd2[0]);
