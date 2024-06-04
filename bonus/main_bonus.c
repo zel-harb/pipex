@@ -82,7 +82,6 @@ int	main(int ac, char **av, char **env)
 	t_pip	pip;
 
 	full_pipe(&pip, av, ac, env);
-	
 	pip_pipe(pip, pip.pfd);
 	if (ft_cmp("here_doc", av[1]) == 0)
 	{
@@ -93,7 +92,6 @@ int	main(int ac, char **av, char **env)
 	}
 	else
 	{
-		
 		mult_pip(&pip, ac);
 	}
 	return (pip.value >> 8);
