@@ -6,20 +6,20 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 21:11:18 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/03 11:50:02 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/04 06:13:34 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	null_env(char **av, t_pip *pip, char **env)
+void	null_env(char **av, t_pip *pip, char **env, int i)
 {
 	if (pip->pid == 0)
 	{
-		child_cmd3(av, pip, env);
+		child_cmd3(av, pip, env, i);
 	}
 	else
-		child_cmd4(av, pip, env);
+		child_cmd4(av, pip, env, i);
 	close_wait(pip);
 }
 
@@ -40,12 +40,8 @@ void	check_pip(t_pip *pip)
 
 void	perr(char *str)
 {
-	write(2, ">>> here: ", 9);
-	write(2, str, ft_strlen(str));
-	write(2, "\n", 1);
 	ft_putstr_fd("bash : ", 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": no such file or ..\n", 2);
+	perror(str);
 }
 
 void	close_wait(t_pip *pip)

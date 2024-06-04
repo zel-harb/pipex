@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/03 16:35:31 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/04 08:32:44 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ void	here_doc(t_pip *pip, int ac)
 {
 	if (pip->path_env == NULL)
 	{
-		env_null(pip, pip->pid, pip->pfd, ac);
+		env_null(pip,ac,1);
 		close_here_doc(pip, pip->pfd, pip->pid, ac);
 		free(pip->pfd);
 		free(pip->pid);
 	}
 	else if (pip->path_env[0] == NULL)
 	{
-		env_null(pip, pip->pid, pip->pfd, ac);
+		env_null(pip, ac,1);
 		close_here_doc(pip, pip->pfd, pip->pid, ac);
 		free_here(pip);
 	}
@@ -55,7 +55,7 @@ void	mult_pip(t_pip *pip, int ac)
 {
 	if (pip->path_env == NULL)
 	{
-		env_null(pip, pip->pid, pip->pfd, ac);
+		env_null(pip,ac,1);
 		ft_close(pip->pfd, pip->nbr_pip);
 		wait_pid(pip->pid, ac, pip);
 		free(pip->pfd);
@@ -63,7 +63,8 @@ void	mult_pip(t_pip *pip, int ac)
 	}
 	else if (!pip->path_env[0])
 	{
-		env_null_exp(pip, pip->pid, pip->pfd, ac);
+		// env_null_exp(pip, pip->pid, pip->pfd, ac);
+		env_null(pip,ac,0);
 		ft_close(pip->pfd, pip->nbr_pip);
 		wait_pid(pip->pid, ac, pip);
 		free_here(pip);
@@ -81,6 +82,11 @@ int	main(int ac, char **av, char **env)
 {
 	t_pip	pip;
 
+	if(ac < 5 || (ft_cmp("here_doc", av[1]) == 0 && ac < 6))
+	{
+		ft_putstr_fd("More/less arguments\n", 2);
+		exit(1);
+	}
 	full_pipe(&pip, av, ac, env);
 	pip_pipe(pip, pip.pfd);
 	if (ft_cmp("here_doc", av[1]) == 0)

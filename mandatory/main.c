@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/03 12:06:13 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/04 06:02:11 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	all_fnc(t_pip *pip, char **av)
 	if (!pip->path_env)
 	{
 		pip->pid = fork();
-		null_env(av, pip, pip->env);
+		null_env(av, pip, pip->env, 1);
 	}
 	else if (!pip->path_env[0])
 	{
 		pip->pid = fork();
-		null_env(av, pip, pip->env);
+		null_env(av, pip, pip->env, 0);
 		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
 	}
 	else

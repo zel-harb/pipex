@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:28 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/03 11:52:15 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/04 06:02:37 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ void		dup_close1(int fd, t_pip *pip, char **av);
 void		dup_close2(int fd1, t_pip *pip, char **av);
 void		perr(char *str);
 void		close_wait(t_pip *pip);
-void		child_cmd4(char **av, t_pip *pip, char **env);
-void		null_env(char **av, t_pip *pip, char **env);
+void		child_cmd4(char **av, t_pip *pip, char **env, int i);
+void		null_env(char **av, t_pip *pip, char **env, int i);
 void		check_pip(t_pip *pip);
-void		child_cmd3(char **av, t_pip *pip, char **env);
+void		child_cmd3(char **av, t_pip *pip, char **env, int i);
 void		child_cmd1(char **av, t_pip *pip, char **env);
 void		child_cmd2(char **av, t_pip *pip, char **env);
 void		help_cmd1(t_pip *pip, int fd, char **env, char **av);

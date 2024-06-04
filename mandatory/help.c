@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 05:25:52 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/03 11:59:41 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/04 06:14:00 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	help_cmd1(t_pip *pip, int fd, char **env, char **av)
 	if (find(av[2]) == 0)
 	{
 		execve(pip->cmd1[0], pip->cmd1, env);
-		perr("execve");
+		perror(pip->cmd1[0]);
 	}
 	else if (ft_strncmp(av[2], "/", 1) == 0 || ft_strncmp(av[2], "./", 2) == 0)
 	{
@@ -38,7 +38,7 @@ void	help_cmd1(t_pip *pip, int fd, char **env, char **av)
 	found_cmd(pip->path_env, pip, pip->cmd1[0]);
 	res = ft_strjoin(pip->path, "/");
 	execve(ft_strjoin(res, pip->cmd1[0]), pip->cmd1, env);
-	perr("execve");
+	perror(pip->cmd1[0]);
 	exit(1);
 }
 

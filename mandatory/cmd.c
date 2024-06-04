@@ -6,13 +6,13 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 03:14:03 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/03 11:55:21 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/04 06:01:27 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	child_cmd3(char **av, t_pip *pip, char **env)
+void	child_cmd3(char **av, t_pip *pip, char **env, int i)
 {
 	int		fd;
 	char	*res;
@@ -22,7 +22,7 @@ void	child_cmd3(char **av, t_pip *pip, char **env)
 	{
 		ft_putstr_fd("bash: ", 2);
 		perror(av[1]);
-		if (!pip->path_env[0])
+		if (i == 0)
 			ft_free(pip->path_env, count_words(get_path(env), ':'));
 		exit(1);
 	}
@@ -34,13 +34,13 @@ void	child_cmd3(char **av, t_pip *pip, char **env)
 		perror(pip->cmd1[0]);
 		ft_free(pip->cmd1, count_words(av[2], ' '));
 		ft_free(pip->cmd2, count_words(av[3], ' '));
-		if (!pip->path_env[0])
+		if (i == 0)
 			ft_free(pip->path_env, count_words(get_path(env), ':'));
 		exit(1);
 	}
 }
 
-void	child_cmd4(char **av, t_pip *pip, char **env)
+void	child_cmd4(char **av, t_pip *pip, char **env, int i)
 {
 	int		fd1;
 	char	*res1;
@@ -53,7 +53,7 @@ void	child_cmd4(char **av, t_pip *pip, char **env)
 		{
 			ft_putstr_fd("bash: ", 2);
 			perror(av[4]);
-			if (!pip->path_env[0])
+			if (i == 0)
 				ft_free(pip->path_env, count_words(get_path(env), ':'));
 			exit(1);
 		}
@@ -63,7 +63,7 @@ void	child_cmd4(char **av, t_pip *pip, char **env)
 		perror(pip->cmd2[0]);
 		ft_free(pip->cmd1, count_words(av[2], ' '));
 		ft_free(pip->cmd2, count_words(av[3], ' '));
-		if (!pip->path_env[0])
+		if (i == 0)
 			ft_free(pip->path_env, count_words(get_path(env), ':'));
 		exit(127);
 	}
