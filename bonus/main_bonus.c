@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/04 08:32:44 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/05 08:40:27 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,25 @@ void	close_here_doc(t_pip *pip, int *pfd, int *pid, int ac)
 	wait_pid(pid, ac, pip);
 }
 
-void	free_here(t_pip *pip)
-{
-	ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
-	free(pip->pfd);
-	free(pip->pid);
-}
-
 void	here_doc(t_pip *pip, int ac)
 {
 	if (pip->path_env == NULL)
 	{
-		env_null(pip,ac,1);
+		env_here_doc_null(pip, ac, 1);
 		close_here_doc(pip, pip->pfd, pip->pid, ac);
-		free(pip->pfd);
-		free(pip->pid);
+		free_all(pip, 1);
 	}
 	else if (pip->path_env[0] == NULL)
 	{
-		env_null(pip, ac,1);
+		env_here_doc_null(pip, ac, 0);
 		close_here_doc(pip, pip->pfd, pip->pid, ac);
-		free_here(pip);
+		free_all(pip, 0);
 	}
 	else
 	{
 		all_here(pip, pip->pid, pip->pfd, ac);
 		close_here_doc(pip, pip->pfd, pip->pid, ac);
-		free_here(pip);
+		free_all(pip, 0);
 	}
 }
 
@@ -55,26 +47,24 @@ void	mult_pip(t_pip *pip, int ac)
 {
 	if (pip->path_env == NULL)
 	{
-		env_null(pip,ac,1);
+		env_null(pip, ac, 1);
 		ft_close(pip->pfd, pip->nbr_pip);
 		wait_pid(pip->pid, ac, pip);
-		free(pip->pfd);
-		free(pip->pid);
+		free_all(pip, 1);
 	}
 	else if (!pip->path_env[0])
 	{
-		// env_null_exp(pip, pip->pid, pip->pfd, ac);
-		env_null(pip,ac,0);
+		env_null(pip, ac, 0);
 		ft_close(pip->pfd, pip->nbr_pip);
 		wait_pid(pip->pid, ac, pip);
-		free_here(pip);
+		free_all(pip, 0);
 	}
 	else
 	{
 		all_cmd(pip, ac);
 		ft_close(pip->pfd, pip->nbr_pip);
 		wait_pid(pip->pid, ac, pip);
-		free_here(pip);
+		free_all(pip, 0);
 	}
 }
 
@@ -82,7 +72,7 @@ int	main(int ac, char **av, char **env)
 {
 	t_pip	pip;
 
-	if(ac < 5 || (ft_cmp("here_doc", av[1]) == 0 && ac < 6))
+	if (ac < 5 || (ft_cmp("here_doc", av[1]) == 0 && ac < 6))
 	{
 		ft_putstr_fd("More/less arguments\n", 2);
 		exit(1);

@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:28 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/04 07:04:46 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/05 09:01:12 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void		all_cmd(t_pip *pip, int ac);
 void		first_cmd(t_pip *pip, int *pid);
 void		last_cmd(t_pip *pip, int *pfd, int ac);
 void		mid_cmd(t_pip *pip, int *pid);
-void		env_null(t_pip *pip, int ac,int j);
+void		env_null(t_pip *pip, int ac, int j);
 char		*get_next_line(int fd);
 char		*ft_strjoin_line(char *s1, char *s2);
 char		*ft_strchr(char *s, int c);
@@ -75,7 +75,8 @@ void		all_here(t_pip *pip, int *pid, int *pfd, int ac);
 void		here_close_wait(t_pip *pip);
 void		help(t_pip *pip, char **cmd, int value);
 void		status(t_pip *pip, char **cmd, int i, int value);
-void		env_here_doc_null(t_pip *pip, int *pid, int *pfd, int ac);
+void		env_here_doc_null(t_pip *pip, int ac, int j);
 void		env_null_exp(t_pip *pip, int *pid, int *pfd, int ac);
 void		save_path(t_pip *pip, char *str, char *res);
+void		free_all(t_pip *pip, int i);
 #endif

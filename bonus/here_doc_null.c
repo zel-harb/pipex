@@ -6,13 +6,13 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:03:46 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/03 13:13:52 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/05 08:52:15 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	first_cmdh_null(t_pip *pip, int *pfd)
+void	first_cmdh_null(t_pip *pip, int *pfd, int i)
 {
 	char	**cmd;
 
@@ -21,24 +21,27 @@ void	first_cmdh_null(t_pip *pip, int *pfd)
 	close(pip->pfd1[0]);
 	close(pip->pfd1[1]);
 	ft_close(pfd, pip->nbr_pip);
-	cmd = ft_split(pip->av[2], ' ');
+	cmd = ft_split(pip->av[pip->index_av], ' ');
 	execve(cmd[0], cmd, pip->env);
 	ft_putstr_fd("bash: ", 2);
-	perr(cmd[0], 1);
+	perror(cmd[0]);
+	ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
+	free_all(pip, i);
+	exit(1);
 }
 
-void	last_cmdh_null(t_pip *pip, int *pfd, int ac)
+void	last_cmdh_null(t_pip *pip, int *pfd, int ac, int i)
 {
-	int		fd2;
 	char	**cmd;
 	char	*av;
 
-	fd2 = open(pip->av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	pip->fd2 = open(pip->av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	av = pip->av[ac - 1];
 	if (access(av, F_OK) == -1 || access(av, R_OK) == -1)
 	{
 		ft_putstr_fd("bash: ", 2);
 		perror(pip->av[ac - 1]);
+		free_all(pip, i);
 		exit(1);
 	}
 	dup2(pfd[pip->index_pip - 2], 0);
@@ -51,10 +54,12 @@ void	last_cmdh_null(t_pip *pip, int *pfd, int ac)
 	execve(cmd[0], cmd, pip->env);
 	ft_putstr_fd("bash: ", 2);
 	perror(cmd[0]);
+	ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
+	free_all(pip, i);
 	exit(127);
 }
 
-void	mid_cmdh_null(t_pip *pip, int *pfd)
+void	mid_cmdh_null(t_pip *pip, int *pfd, int i)
 {
 	char	**cmd;
 
@@ -67,25 +72,27 @@ void	mid_cmdh_null(t_pip *pip, int *pfd)
 	execve(cmd[0], cmd, pip->env);
 	ft_putstr_fd("bash: ", 2);
 	perror(cmd[0]);
+	ft_free(cmd, count_words(pip->av[pip->index_av], ' '));
+	free_all(pip, i);
 	exit(1);
 }
 
-void	env_here_doc_null(t_pip *pip, int *pid, int *pfd, int ac)
+void	env_here_doc_null(t_pip *pip, int ac, int j)
 {
 	int	i;
 
 	i = 0;
 	while (pip->index_av < ac - 1)
 	{
-		pid[i] = fork();
-		if (pid[i] == 0)
+		pip->pid[i] = fork();
+		if (pip->pid[i] == 0)
 		{
-			if (pip->index_av == 2)
-				first_cmdh_null(pip, pfd);
+			if (pip->index_av == 3)
+				first_cmdh_null(pip, pip->pfd, j);
 			else if (pip->index_av == ac - 2)
-				last_cmdh_null(pip, pfd, ac);
+				last_cmdh_null(pip, pip->pfd, ac, j);
 			else
-				mid_cmdh_null(pip, pfd);
+				mid_cmdh_null(pip, pip->pfd, j);
 		}
 		pip->index_pip += 2;
 		pip->index_av++;

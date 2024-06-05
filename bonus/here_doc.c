@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:58:10 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/03 14:56:21 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/05 08:44:28 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	first_cmdh(t_pip *pip, int *pfd)
 {
-	char	*res;
 	char	**cmd;
 
 	dup2(pip->pfd1[0], 0);
@@ -29,7 +28,6 @@ void	first_cmdh(t_pip *pip, int *pfd)
 
 void	last_cmdh(t_pip *pip, int *pfd, int ac)
 {
-	char	*res;
 	char	**cmd;
 	char	*av;
 
