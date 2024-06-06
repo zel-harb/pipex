@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 21:11:18 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/04 08:13:24 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/05 17:04:04 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	perr(char *str, int value)
 
 int	ft_strcmp(char *s1, char *s2)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (s2[i] == '\n' || ((s1[i] == s2[i]) && s1[i] && s2[i]))

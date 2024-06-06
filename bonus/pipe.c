@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:28:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/04 19:11:45 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/06 10:03:15 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	full_pipe(t_pip *pip, char **av, int ac, char **env)
 	pip->av = av;
 	pip->env = env;
 	pip->path_env = ft_split(get_path(env), ':');
-	if (ft_cmp("here_doc", av[1]) == 0)
+	if (ft_strcmp("here_doc", av[1]) == 0)
 	{
 		pip->pfd = malloc(sizeof(int) * (ac - 5) * 2);
 		pip->pid = malloc(sizeof(int) * (ac - 4));
@@ -68,7 +68,7 @@ void	wait_pid(int *pid, int ac, t_pip *pip)
 	int	i;
 
 	i = 0;
-	if (ft_cmp("here_doc", pip->av[1]) == 0)
+	if (ft_strcmp("here_doc", pip->av[1]) == 0)
 	{
 		while (i < ac - 4)
 		{
@@ -89,15 +89,22 @@ void	wait_pid(int *pid, int ac, t_pip *pip)
 int	ft_cmp(char *s1, char *name_moves)
 {
 	int	i;
+	int len1;
+	int len2;
 
 	i = 0;
-	while (name_moves[i])
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(name_moves);
+	while (name_moves[i] && s1[i])
 	{
-		if (name_moves[i] != s1[i] && name_moves[i] != '\n')
+		if (name_moves[i] != s1[i])
 		{
 			return (1);
 		}
 		i++;
 	}
-	return (0);
+	if(len1 == len2 - 1)
+		return (0);
+	else
+		return 1;
 }

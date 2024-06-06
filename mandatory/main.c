@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/04 06:02:11 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/06 10:21:18 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int	main(int ac, char **av, char **env)
 		ft_putstr_fd("More/less arguments\n", 2);
 		exit(1);
 	}
-	pipe(pip.pfd);
+	if(pipe(pip.pfd) == -1)
+		return 1;
 	pip.path_env = ft_split(get_path(env), ':');
 	pip.env = env;
 	all_fnc(&pip, av);

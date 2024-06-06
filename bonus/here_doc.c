@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:58:10 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/05 08:44:28 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/06 10:25:43 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	last_cmdh(t_pip *pip, int *pfd, int ac)
 	char	**cmd;
 	char	*av;
 
-	pip->fd2 = open(pip->av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	pip->fd2 = open(pip->av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 0777);
 	av = pip->av[ac - 1];
 	if (access(av, F_OK) == -1 || access(av, R_OK) == -1)
 	{

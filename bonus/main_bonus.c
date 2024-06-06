@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/05 08:40:27 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/05 17:06:03 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,14 @@ int	main(int ac, char **av, char **env)
 {
 	t_pip	pip;
 
-	if (ac < 5 || (ft_cmp("here_doc", av[1]) == 0 && ac < 6))
+	if (ac < 5 || ft_strcmp("here_doc", av[1]) == 0 && ac < 6)
 	{
 		ft_putstr_fd("More/less arguments\n", 2);
 		exit(1);
 	}
 	full_pipe(&pip, av, ac, env);
 	pip_pipe(pip, pip.pfd);
-	if (ft_cmp("here_doc", av[1]) == 0)
+	if (ft_strcmp("here_doc", av[1]) == 0)
 	{
 		pipe(pip.pfd1);
 		write_pipe(&pip);

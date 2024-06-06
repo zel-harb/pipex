@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:28 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/04 06:02:37 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/06 10:42:52 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ void		help_cmd2(t_pip *pip, int fd, char **env, char **av);
 int			vide(char *av);
 void		ft_output_fnc(char *str, char *res, char *res_a, t_pip *pip);
 void		ft_output(char *str, char *res);
-
+char	**ft_split_ws(char *str);
 void		free_nfc(t_pip *pip);
 #endif
