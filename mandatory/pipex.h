@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:28 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/06 10:42:52 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/06 11:55:57 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int			count_words(char const *s, char c);
 char		*ft_strnstr(const char *s, const char *to_find, size_t len);
 char		*get_path(char **env);
 void		full_pip(t_pip *pip, char **av);
-void		check_option(t_pip pip);
 char		**ft_free(char **s, int j);
 char		**ft_split(char const *s, char c);
 int			find(char *av);
@@ -62,6 +61,5 @@ void		help_cmd2(t_pip *pip, int fd, char **env, char **av);
 int			vide(char *av);
 void		ft_output_fnc(char *str, char *res, char *res_a, t_pip *pip);
 void		ft_output(char *str, char *res);
-char	**ft_split_ws(char *str);
 void		free_nfc(t_pip *pip);
 #endif

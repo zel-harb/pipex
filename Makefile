@@ -6,7 +6,6 @@ SOURCES = ./mandatory/main.c \
 		  ./mandatory/check.c \
 		  ./mandatory/utils.c \
 		  ./mandatory/split.c \
-		  ./mandatory/split2.c \
 		  ./mandatory/funct.c \
 		  ./mandatory/funct2.c \
 		  ./mandatory/utils2.c \

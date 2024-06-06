@@ -51,8 +51,8 @@ int	main(int ac, char **av, char **env)
 		ft_putstr_fd("More/less arguments\n", 2);
 		exit(1);
 	}
-	if(pipe(pip.pfd) == -1)
-		return 1;
+	if (pipe(pip.pfd) == -1)
+		return (1);
 	pip.path_env = ft_split(get_path(env), ':');
 	pip.env = env;
 	all_fnc(&pip, av);

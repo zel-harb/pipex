@@ -89,8 +89,8 @@ void	wait_pid(int *pid, int ac, t_pip *pip)
 int	ft_cmp(char *s1, char *name_moves)
 {
 	int	i;
-	int len1;
-	int len2;
+	int	len1;
+	int	len2;
 
 	i = 0;
 	len1 = ft_strlen(s1);
@@ -103,8 +103,8 @@ int	ft_cmp(char *s1, char *name_moves)
 		}
 		i++;
 	}
-	if(len1 == len2 - 1)
+	if (len1 == len2 - 1)
 		return (0);
 	else
-		return 1;
+		return (1);
 }
