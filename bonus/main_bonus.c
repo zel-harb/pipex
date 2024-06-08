@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/07 15:42:20 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/08 06:01:25 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int	main(int ac, char **av, char **env)
 	pip_pipe(pip, pip.pfd);
 	if (ft_strcmp("here_doc", av[1]) == 0)
 	{
-		pipe(pip.pfd1);
+		if (pipe(pip.pfd1) == -1)
+			exit(1);
 		write_pipe(&pip);
 		pip.index_av = pip.index_av + 1;
 		here_doc(&pip, ac);

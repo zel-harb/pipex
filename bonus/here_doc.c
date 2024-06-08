@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:58:10 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/06 10:25:43 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/08 21:16:44 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	last_cmdh(t_pip *pip, int *pfd, int ac)
 
 	pip->fd2 = open(pip->av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 0777);
 	av = pip->av[ac - 1];
-	if (access(av, F_OK) == -1 || access(av, R_OK) == -1)
+	if (pip->fd2 < 0)
 	{
 		ft_putstr_fd("bash: ", 2);
 		perror(pip->av[ac - 1]);
@@ -76,6 +76,8 @@ void	all_here(t_pip *pip, int *pid, int *pfd, int ac)
 	while (pip->index_av < ac - 1)
 	{
 		pid[i] = fork();
+		if (pip->pid[i] == -1)
+			exit(1);
 		if (pid[i] == 0)
 		{
 			if (pip->index_av == 3)

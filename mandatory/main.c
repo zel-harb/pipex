@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:47:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/07 11:45:16 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/08 06:45:24 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int ac, char **av, char **env)
 
 	if (ac != 5)
 	{
-		ft_putstr_fd("More/less arguments\n", 2);
+		ft_putstr_fd("More / less arguments\n", 2);
 		exit(1);
 	}
 	if (pipe(pip.pfd) == -1)

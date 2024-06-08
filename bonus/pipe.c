@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:28:22 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/06 10:03:15 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/08 06:01:02 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	pip_pipe(t_pip pip, int *pfd)
 	i = 0;
 	while (i < pip.nbr_pip)
 	{
-		pipe(pfd + i * 2);
+		if (pipe(pfd + i * 2) == -1)
+			exit(1);
 		i++;
 	}
 }

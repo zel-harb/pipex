@@ -26,7 +26,6 @@ BSOURCES = 	./bonus/main_bonus.c \
 		  	./bonus/here_doc.c	\
 		  	./bonus/pipe.c \
 		 	./bonus/here_doc_null.c \
-		  	./bonus/cmd_exp.c
 
 OBJECTS = $(SOURCES:.c=.o)
 BOBJECTS = $(BSOURCES:.c=.o)

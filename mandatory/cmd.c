@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 03:14:03 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/07 20:41:47 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/08 21:14:22 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	child_cmd2(char **av, t_pip *pip, char **env)
 	if (pip->pid1 == 0)
 	{
 		fd1 = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0666);
-		if (access(av[4], F_OK) == -1 || access(av[4], R_OK) == -1)
+		if (fd1 < 0)
 		{
 			ft_putstr_fd("bash: ", 2);
 			perror(av[4]);

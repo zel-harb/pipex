@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:41:42 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/03 16:42:29 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/08 21:15:55 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	last_cmd(t_pip *pip, int *pfd, int ac)
 
 	pip->fd2 = open(pip->av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	av = pip->av[ac - 1];
-	if (access(av, F_OK) == -1 || access(av, R_OK) == -1)
+	if (pip->fd2 < 0)
 	{
 		ft_putstr_fd("bash: ", 2);
 		ft_free(pip->path_env, count_words(get_path(pip->env), ':'));
@@ -84,6 +84,8 @@ void	all_cmd(t_pip *pip, int ac)
 	while (pip->index_av < ac - 1)
 	{
 		pip->pid[i] = fork();
+		if (pip->pid[i] == -1)
+			exit(1);
 		if (pip->pid[i] == 0)
 		{
 			if (pip->index_av == 2)
