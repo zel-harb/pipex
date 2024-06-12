@@ -6,7 +6,7 @@
 /*   By: zel-harb <zel-harb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 19:53:28 by zel-harb          #+#    #+#             */
-/*   Updated: 2024/06/08 21:17:28 by zel-harb         ###   ########.fr       */
+/*   Updated: 2024/06/09 08:07:58 by zel-harb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	first_cmd_null(t_pip *pip, int *pfd, int i)
 	char	**cmd;
 
 	fd1 = open(pip->av[1], O_RDONLY);
-	if (access(pip->av[1], F_OK) == -1 || access(pip->av[1], R_OK) == -1)
+	if (fd1 < 0)
 	{
 		ft_putstr_fd("bash: ", 2);
 		perror(pip->av[1]);
